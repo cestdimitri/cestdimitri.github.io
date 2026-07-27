@@ -1,4 +1,4 @@
-# Dimitri Andreenko — portfolio
+# Dimitrii Andreenko — portfolio
 
 Personal portfolio site. Editor and content designer based in Porto, Portugal.
 

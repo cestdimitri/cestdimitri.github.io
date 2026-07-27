@@ -21,6 +21,8 @@
   --accent-2:   #1b4ef5;              /* accent for large fills */
   --accent-ink: #ffffff;
   --accent-wash: rgba(27,78,245,.08);
+  --stamp:      #ff6a13;
+  --stamp-ink:  #241703;
 
   /* type */
   --serif: "Instrument Serif", "Playfair Display", "Iowan Old Style", Georgia, serif;
@@ -56,6 +58,8 @@
   --accent-2:   #2f5cf7;
   --accent-ink: #070910;
   --accent-wash: rgba(115,145,255,.12);
+  --stamp:      #ff8330;
+  --stamp-ink:  #241703;
 }
 
 /* ── 2. BASE ─────────────────────────────────────────────── */
@@ -287,6 +291,7 @@ a{ color:inherit; text-decoration:none; }
   padding-top:clamp(8rem,16vh,12rem);
   padding-bottom:clamp(3rem,6vw,5rem);
 }
+.hero .wrap{ position:relative; }
 
 .hero__meta{
   display:inline-flex; align-items:center; gap:.6rem;
@@ -355,6 +360,86 @@ a{ color:inherit; text-decoration:none; }
 }
 .hero__cta:hover{ background:var(--accent-2); color:#fff; }
 .hero__cta:hover svg{ transform:translateY(3px); }
+
+/* ── STAMP STICKER ───────────────────────────────────────
+   Wrapper carries position, rotation and drop-shadow.
+   The inner .stamp__paper carries the mask — filter is
+   applied before mask, so the shadow has to live one level
+   up to follow the perforated edge instead of the box.     */
+.stamp{
+  position:absolute;
+  top:clamp(.5rem,3vw,2.5rem); right:0;
+  z-index:2;
+  display:inline-block;
+  transform:rotate(-5deg);
+  filter:drop-shadow(0 6px 14px rgba(20,12,0,.28));
+  transition:transform .45s var(--ease), filter .45s var(--ease);
+}
+.stamp:hover{
+  transform:rotate(-1.5deg) scale(1.05);
+  filter:drop-shadow(0 12px 24px rgba(20,12,0,.36));
+}
+.stamp:active{ transform:rotate(-3deg) scale(1.01); }
+
+.stamp__paper{
+  --notch:7px;
+  --step:17px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.3rem;
+  padding:1.4rem 1.5rem 1.25rem;
+  background:var(--stamp);
+  color:var(--stamp-ink);
+  text-align:center;
+
+  -webkit-mask:
+    radial-gradient(var(--notch) at 50% 0,    #0000 97%, #000) 0 0    / var(--step) 100%,
+    radial-gradient(var(--notch) at 50% 100%, #0000 97%, #000) 0 100% / var(--step) 100%,
+    radial-gradient(var(--notch) at 0 50%,    #0000 97%, #000) 0 0    / 100% var(--step),
+    radial-gradient(var(--notch) at 100% 50%, #0000 97%, #000) 100% 0 / 100% var(--step);
+  -webkit-mask-composite:source-in;
+  mask:
+    radial-gradient(var(--notch) at 50% 0,    #0000 97%, #000) 0 0    / var(--step) 100%,
+    radial-gradient(var(--notch) at 50% 100%, #0000 97%, #000) 0 100% / var(--step) 100%,
+    radial-gradient(var(--notch) at 0 50%,    #0000 97%, #000) 0 0    / 100% var(--step),
+    radial-gradient(var(--notch) at 100% 50%, #0000 97%, #000) 100% 0 / 100% var(--step);
+  mask-composite:intersect;
+
+  /* dashed frame, held clear of the perforations */
+  outline:1px dashed color-mix(in srgb, var(--stamp-ink) 45%, transparent);
+  outline-offset:-11px;
+}
+
+.stamp__eyebrow{
+  font-family:var(--mono);
+  font-size:.5625rem; font-weight:500;
+  letter-spacing:.18em; text-transform:uppercase;
+  opacity:.75;
+}
+.stamp__main{
+  font-family:var(--serif);
+  font-size:clamp(1.35rem,2.2vw,1.75rem);
+  line-height:1;
+  letter-spacing:-.015em;
+  white-space:nowrap;
+}
+.stamp__rule{
+  width:2rem; height:1px;
+  background:color-mix(in srgb, var(--stamp-ink) 40%, transparent);
+  margin:.15rem 0;
+}
+.stamp__sub{
+  display:inline-flex; align-items:center; gap:.3rem;
+  font-family:var(--mono);
+  font-size:.625rem; letter-spacing:.06em;
+  opacity:.8;
+}
+.stamp__sub svg{
+  width:.75rem; height:.75rem;
+  fill:none; stroke:currentColor; stroke-width:2;
+  stroke-linecap:round; stroke-linejoin:round;
+}
 
 /* ticker */
 .ticker{
@@ -478,6 +563,68 @@ a{ color:inherit; text-decoration:none; }
   font-size:var(--t-sm); padding-block:3rem;
 }
 
+.card__badge{
+  position:absolute; top:.85rem; left:.85rem;
+  font-family:var(--mono); font-size:.625rem; font-weight:500;
+  letter-spacing:.12em; text-transform:uppercase;
+  background:var(--accent-2); color:#fff;
+  padding:.32rem .6rem; border-radius:99px;
+  z-index:1;
+}
+
+/* ── GALLERY PAGE ────────────────────────────────────────── */
+.section--page{ padding-top:clamp(7rem,14vh,10rem); }
+
+.back-link{
+  display:inline-flex; align-items:center; gap:.45rem;
+  font-size:var(--t-sm); color:var(--ink-2);
+  margin-bottom:clamp(1.5rem,3vw,2.25rem);
+  transition:color .25s var(--ease);
+}
+.back-link svg{
+  width:1rem; height:1rem; fill:none; stroke:currentColor;
+  stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;
+  transition:transform .3s var(--ease);
+}
+.back-link:hover{ color:var(--accent); }
+.back-link:hover svg{ transform:translateX(-3px); }
+
+.page-lede{
+  font-family:var(--serif);
+  font-size:var(--t-xl); font-weight:400;
+  line-height:1.26; letter-spacing:-.015em;
+  max-width:32ch;
+  margin-bottom:clamp(2.5rem,5vw,4rem);
+  text-wrap:balance;
+}
+
+.gal-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:var(--gap);
+}
+.gal__fig{ margin:0; }
+.gal__ph, .gal__fig img{
+  width:100%; aspect-ratio:4/5; object-fit:cover;
+  display:block; border-radius:3px;
+  background:var(--paper-2); color:var(--ink);
+  transition:transform .6s var(--ease);
+}
+.gal__fig:hover .gal__ph, .gal__fig:hover img{ transform:scale(1.02); }
+.gal__cap{
+  display:block;
+  margin-top:.7rem;
+  font-family:var(--mono); font-size:var(--t-xs);
+  color:var(--ink-3); letter-spacing:.04em;
+}
+.gal-hint{
+  margin-top:clamp(2rem,4vw,3rem);
+  padding-top:1.25rem;
+  border-top:1px solid var(--rule-soft);
+  font-family:var(--mono); font-size:.6875rem;
+  color:var(--ink-3); letter-spacing:.03em;
+}
+
 /* ── 7. ABOUT ────────────────────────────────────────────── */
 .about{
   display:grid;
@@ -491,7 +638,14 @@ a{ color:inherit; text-decoration:none; }
   background:var(--paper-2); color:var(--ink);
   aspect-ratio:4/5;
 }
-.portrait svg{ width:100%; height:100%; }
+.portrait__ph{ width:100%; height:100%; }
+.portrait__img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+}
+/* caption only shows while the photo is missing */
+.portrait__img ~ .portrait__cap{ display:none; }
 .portrait__cap{
   position:absolute; inset:auto 0 0 0;
   padding:.6rem .9rem;
@@ -500,6 +654,43 @@ a{ color:inherit; text-decoration:none; }
   border-top:1px solid var(--rule-soft);
   background:color-mix(in srgb, var(--paper) 70%, transparent);
   backdrop-filter:blur(6px);
+}
+
+/* Instagram highlight */
+.ig{
+  display:flex; align-items:center; gap:.8rem;
+  margin-top:.9rem;
+  padding:.85rem 1rem;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  transition:border-color .3s var(--ease), background .3s var(--ease);
+}
+.ig:hover{ border-color:var(--accent); background:var(--accent-wash); }
+.ig__icon{
+  width:1.3rem; height:1.3rem; flex:none;
+  fill:none; stroke:var(--accent); stroke-width:1.6;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+.ig__text{ display:flex; flex-direction:column; line-height:1.3; min-width:0; }
+.ig__label{ font-size:var(--t-sm); font-weight:500; }
+.ig__handle{
+  font-family:var(--mono); font-size:.6875rem;
+  color:var(--ink-3); overflow-wrap:anywhere;
+}
+.ig__arrow{
+  width:.95rem; height:.95rem; margin-left:auto; flex:none;
+  fill:none; stroke:var(--ink-3); stroke-width:1.6;
+  stroke-linecap:round; stroke-linejoin:round;
+  transition:transform .35s var(--ease), stroke .3s var(--ease);
+}
+.ig:hover .ig__arrow{ transform:translate(3px,-3px); stroke:var(--accent); }
+
+/* Icon links in the contact list */
+.link--icon{ display:inline-flex; align-items:center; gap:.45rem; }
+.link--icon svg{
+  width:.95rem; height:.95rem; flex:none;
+  fill:none; stroke:var(--accent); stroke-width:1.6;
+  stroke-linecap:round; stroke-linejoin:round;
 }
 
 .about__text > p{
@@ -538,23 +729,15 @@ a{ color:inherit; text-decoration:none; }
 .practice{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
+  column-gap:clamp(1.75rem,4vw,3.5rem);
   border-top:1px solid var(--rule-soft);
 }
+/* No horizontal padding: every column aligns to its own grid line,
+   and the first sits flush with the container edge. Separation
+   comes from column-gap, so the three blocks stay identical.      */
 .practice__item{
-  padding:clamp(1.75rem,3vw,2.5rem) clamp(1.25rem,2.5vw,2rem);
+  padding-block:clamp(1.75rem,3vw,2.5rem);
   border-bottom:1px solid var(--rule-soft);
-  border-right:1px solid var(--rule-soft);
-  transition:background .4s var(--ease);
-}
-.practice__item:first-child{ padding-left:0; }
-.practice__item:last-child{ border-right:0; padding-right:0; }
-.practice__item:hover{ background:var(--accent-wash); }
-
-.practice__num{
-  display:block;
-  font-family:var(--mono); font-size:var(--t-xs);
-  font-weight:500; letter-spacing:.1em; color:var(--accent);
-  margin-bottom:1.25rem;
 }
 .practice__item h3{
   font-family:var(--serif); font-weight:400;
@@ -766,13 +949,13 @@ a{ color:inherit; text-decoration:none; }
 
 @media (max-width:900px){
   .about{ grid-template-columns:1fr; }
-  .about__portrait{ max-width:22rem; }
   .practice{ grid-template-columns:1fr; }
-  .practice__item{ padding-inline:0; border-right:0; }
   .contact-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:2rem; }
   .pdf{ grid-template-columns:1fr; gap:2.5rem; }
   .pdf__preview{ max-width:20rem; }
   .pdf__specs{ grid-template-columns:repeat(4,minmax(0,auto)); }
+  .about__aside{ max-width:22rem; }
+  .gal-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
 
 @media (max-width:820px){
@@ -807,6 +990,21 @@ a{ color:inherit; text-decoration:none; }
   .hero__foot{ grid-template-columns:1fr; align-items:start; gap:1.75rem; }
   .hero__cta{ justify-self:start; }
 
+  /* Stamp rejoins the flow. Spacing is deliberately tighter above
+     than below, so it reads as attached to the headline rather
+     than floating loose against the lede beneath it.            */
+  .hero__title{ margin-bottom:1.65rem; }
+
+  .stamp{
+    position:static;
+    display:inline-block;
+    margin:0 0 2.5rem;
+    transform:translateX(.35rem) rotate(-3deg);
+  }
+  .stamp:hover{ transform:translateX(.35rem) rotate(-1deg) scale(1.03); }
+  .stamp__paper{ padding:1.15rem 1.3rem 1rem; }
+  .stamp__main{ font-size:1.3rem; }
+
   .work-grid{ grid-template-columns:1fr; }
   .card--wide{ grid-column:span 1; }
   .card--wide .card__visual{ aspect-ratio:4/3; }
@@ -826,6 +1024,7 @@ a{ color:inherit; text-decoration:none; }
   .pdf__specs{ grid-template-columns:repeat(2,minmax(0,auto)); }
   .pdf__actions .btn{ flex:1 1 100%; justify-content:center; }
   .lang__btn{ padding:.32rem .45rem; }
+  .gal-grid{ grid-template-columns:1fr; }
 }
 
 @media print{

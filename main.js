@@ -1,5 +1,6 @@
 /* Dimitri Andreenko — portfolio interactions
-   Language · theme · reveal · nav · filters · scroll        */
+   Runs on index.html and gallery.html. Every block is guarded,
+   so a missing element on one page never breaks the other.      */
 
 (function () {
   'use strict';
@@ -12,11 +13,13 @@
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } }
   };
 
+  const root = document.documentElement;
+
   /* ── Language ──────────────────────────────────────── */
   const DICT     = window.I18N || {};
   const LANGS    = ['en', 'ru'];
   const LANG_KEY = 'da-lang';
-  const root     = document.documentElement;
+  const isGallery = /gallery\.html$/.test(location.pathname);
 
   function translate(lang) {
     const dict = DICT[lang];
@@ -34,7 +37,8 @@
       if (v !== undefined) el.innerHTML = v;
     });
 
-    if (dict['doc.title']) document.title = dict['doc.title'];
+    const title = isGallery ? dict['gal.doc.title'] : dict['doc.title'];
+    if (title) document.title = title;
     root.setAttribute('lang', lang);
 
     $$('.lang__btn').forEach((b) => {
@@ -46,18 +50,17 @@
 
   function detectLang() {
     const saved = store.get(LANG_KEY);
-    if (LANGS.includes(saved)) return saved;
+    if (LANGS.indexOf(saved) !== -1) return saved;
     const nav = (navigator.language || 'en').slice(0, 2).toLowerCase();
-    return LANGS.includes(nav) ? nav : 'en';
+    return LANGS.indexOf(nav) !== -1 ? nav : 'en';
   }
 
   translate(detectLang());
 
   $$('.lang__btn').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const lang = btn.dataset.lang;
-      translate(lang);
-      store.set(LANG_KEY, lang);
+      translate(btn.dataset.lang);
+      store.set(LANG_KEY, btn.dataset.lang);
     });
   });
 
@@ -68,8 +71,10 @@
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
     const dark = theme === 'dark';
-    toggle.setAttribute('aria-pressed', String(dark));
-    toggle.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    if (toggle) {
+      toggle.setAttribute('aria-pressed', String(dark));
+      toggle.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    }
     const meta = $('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', dark ? '#090b12' : '#1B4EF5');
   }
@@ -78,11 +83,13 @@
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
 
-  toggle.addEventListener('click', () => {
-    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    applyTheme(next);
-    store.set(THEME_KEY, next);
-  });
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      store.set(THEME_KEY, next);
+    });
+  }
 
   /* ── Reveal on scroll ──────────────────────────────── */
   const revealables = $$('.reveal');
@@ -104,42 +111,47 @@
   const nav     = $('#nav');
   const menuBtn = $('#menu-btn');
 
-  function setMenu(open) {
-    nav.classList.toggle('is-open', open);
-    menuBtn.setAttribute('aria-expanded', String(open));
-    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  if (nav && menuBtn) {
+    const setMenu = (open) => {
+      nav.classList.toggle('is-open', open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+
+    menuBtn.addEventListener('click', () => {
+      setMenu(menuBtn.getAttribute('aria-expanded') !== 'true');
+    });
+    $$('.nav__link').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 820) setMenu(false); });
   }
 
-  menuBtn.addEventListener('click', () => {
-    setMenu(menuBtn.getAttribute('aria-expanded') !== 'true');
-  });
-  $$('.nav__link').forEach((a) => a.addEventListener('click', () => setMenu(false)));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
-  window.addEventListener('resize', () => { if (window.innerWidth > 820) setMenu(false); });
-
   /* ── Project filters ───────────────────────────────── */
-  const cards = $$('#work-grid .card');
-  const empty = $('#grid-empty');
+  const grid = $('#work-grid');
+  if (grid) {
+    const cards = $$('.card', grid);
+    const empty = $('#grid-empty');
 
-  $$('.filter').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const cat = btn.dataset.filter;
+    $$('.filter').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.filter;
 
-      $$('.filter').forEach((b) => {
-        const on = b === btn;
-        b.classList.toggle('is-active', on);
-        b.setAttribute('aria-pressed', String(on));
+        $$('.filter').forEach((b) => {
+          const on = b === btn;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-pressed', String(on));
+        });
+
+        let visible = 0;
+        cards.forEach((card) => {
+          const show = cat === 'all' || card.dataset.cat === cat;
+          card.hidden = !show;
+          if (show) visible++;
+        });
+        if (empty) empty.hidden = visible > 0;
       });
-
-      let visible = 0;
-      cards.forEach((card) => {
-        const show = cat === 'all' || card.dataset.cat === cat;
-        card.hidden = !show;
-        if (show) visible++;
-      });
-      empty.hidden = visible > 0;
     });
-  });
+  }
 
   /* ── Header state, scroll progress, active link ────── */
   const header   = $('#site-header');
@@ -152,14 +164,16 @@
     const y   = window.scrollY;
     const max = document.documentElement.scrollHeight - window.innerHeight;
 
-    header.classList.toggle('is-stuck', y > 12);
-    progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    if (header)   header.classList.toggle('is-stuck', y > 12);
+    if (progress) progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
 
-    let current = '';
-    sections.forEach((sec) => { if (y >= sec.offsetTop - 140) current = sec.id; });
-    links.forEach((a) => {
-      a.classList.toggle('is-active', a.getAttribute('href') === '#' + current);
-    });
+    if (sections.length) {
+      let current = '';
+      sections.forEach((sec) => { if (y >= sec.offsetTop - 140) current = sec.id; });
+      links.forEach((a) => {
+        a.classList.toggle('is-active', a.getAttribute('href') === '#' + current);
+      });
+    }
 
     ticking = false;
   }
@@ -170,5 +184,6 @@
   onScroll();
 
   /* ── Footer year ───────────────────────────────────── */
-  $('#year').textContent = String(new Date().getFullYear());
+  const year = $('#year');
+  if (year) year.textContent = String(new Date().getFullYear());
 })();
