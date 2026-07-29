@@ -11,3 +11,6 @@
 # Logs / temp
 *.log
 Thumbs.db
+
+# Local snapshots — git history is the real backup
+backups/

@@ -133,24 +133,13 @@
 
       <!-- 1 · Book -->
       <li class="card card--wide reveal" data-cat="editorial">
-        <a href="#" class="card__link">
+        <a href="#" class="card__link" data-project="nosorog">
           <div class="card__visual">
-            <svg class="art" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-              <rect class="art-bg" width="800" height="500"/>
-              <g class="art-fg">
-                <rect x="398" y="70" width="2" height="360" opacity=".3"/>
-                <text x="90" y="250" font-size="120" font-family="Instrument Serif, Georgia, serif">Book</text>
-                <rect x="90" y="290" width="250" height="5" opacity=".4"/>
-                <rect x="90" y="310" width="220" height="5" opacity=".4"/>
-                <rect x="90" y="330" width="245" height="5" opacity=".4"/>
-                <rect x="450" y="110" width="270" height="5" opacity=".4"/>
-                <rect x="450" y="130" width="240" height="5" opacity=".4"/>
-                <rect x="450" y="150" width="265" height="5" opacity=".4"/>
-                <rect x="450" y="170" width="180" height="5" opacity=".4"/>
-                <rect x="450" y="220" width="180" height="120" opacity=".16"/>
-                <rect x="450" y="370" width="120" height="8" rx="4" opacity=".5"/>
-              </g>
-            </svg>
+            <!-- src is rewritten to -en / -ru on language switch -->
+            <picture data-img-base="images/nosorog/cover">
+              <source srcset="images/nosorog/cover-en.webp" type="image/webp">
+              <img src="images/nosorog/cover-en.jpg" alt="" loading="lazy" decoding="async">
+            </picture>
           </div>
           <div class="card__body">
             <div class="card__meta"><span data-i18n="cat.editorial">Editorial</span><span data-i18n="p1.year">Year</span></div>
@@ -303,12 +292,13 @@
 </section>
 
 <!-- ─────────────────────────  ABOUT  ───────────────────────── -->
+
+
 <section class="section section--rule" id="about">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="section-num">02</span>
       <h2 class="section-title" data-i18n="about.title">About</h2>
-      <p class="section-note" data-i18n="about.note">Porto, Portugal</p>
     </div>
 
     <div class="about">
@@ -372,6 +362,8 @@
 </section>
 
 <!-- ─────────────────────────  PRACTICE  ───────────────────────── -->
+
+
 <section class="section section--rule" id="practice">
   <div class="wrap">
     <div class="section-head reveal">
@@ -409,6 +401,8 @@
 </section>
 
 <!-- ─────────────────────────  PDF PORTFOLIO  ───────────────────────── -->
+
+
 <section class="section section--rule" id="portfolio">
   <div class="wrap">
     <div class="section-head reveal">
@@ -466,12 +460,13 @@
 </section>
 
 <!-- ─────────────────────────  CONTACT  ───────────────────────── -->
+
+
 <section class="section section--contact" id="contact">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="section-num">05</span>
       <h2 class="section-title" data-i18n="contact.title">Contact</h2>
-      <p class="section-note" data-i18n="contact.note">Available now</p>
     </div>
 
     <p class="contact-line reveal" data-i18n="contact.line">
@@ -482,6 +477,19 @@
       <span class="mailto__text">cest.dimitrii@gmail.com</span>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19L19 5M9 5h10v10"/></svg>
     </a>
+
+    <ul class="reach reveal">
+      <li><a href="https://t.me/cest_horrifique" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11l5 2 2 6 3-4 5 4z"/><path d="M8 13l9-7-6 9"/></svg>
+        <span class="reach__name">Telegram</span>
+        <span class="reach__val">@cest_horrifique</span>
+      </a></li>
+      <li><a href="https://wa.me/351927312416" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.6-4.3A8.5 8.5 0 1 1 20.5 11.5z"/><path d="M9 9.2c.3 1 .8 1.9 1.5 2.6.7.7 1.6 1.2 2.6 1.5l.9-1.1 1.9.8-.4 1.5a5.6 5.6 0 0 1-4.5-1.6 5.6 5.6 0 0 1-1.6-4.5l1.5-.4.8 1.9z"/></svg>
+        <span class="reach__name">WhatsApp</span>
+        <span class="reach__val">+351 927 312 416</span>
+      </a></li>
+    </ul>
 
     <div class="contact-grid">
       <div class="contact-block reveal">
@@ -518,12 +526,49 @@
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <p>&copy; <span id="year">2026</span> <span data-i18n="brand.name">Dimitrii Andreenko</span></p>
-    <p class="footer-mid" data-i18n="footer.set">Set in Instrument Serif &amp; Golos Text</p>
     <a href="#top" class="to-top" data-i18n="footer.top">Back to top ↑</a>
   </div>
 </footer>
 
+<!-- ─────────────────────────  LIGHTBOX  ───────────────────────── -->
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lb-title" hidden>
+  <div class="lb__backdrop" data-lb-close></div>
+
+  <div class="lb__panel" role="document">
+    <button class="lb__close" type="button" data-lb-close aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+
+    <div class="lb__stage">
+      <div class="lb__frame" id="lb-frame"></div>
+
+      <button class="lb__nav lb__nav--prev" type="button" id="lb-prev" aria-label="Previous image">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <button class="lb__nav lb__nav--next" type="button" id="lb-next" aria-label="Next image">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+
+      <p class="lb__counter"><span id="lb-index">1</span>&thinsp;/&thinsp;<span id="lb-total">3</span></p>
+    </div>
+
+    <p class="lb__caption" id="lb-caption"></p>
+
+    <ul class="lb__thumbs" id="lb-thumbs"></ul>
+
+    <div class="lb__info">
+      <div class="lb__text">
+        <p class="lb__meta" id="lb-meta"></p>
+        <h2 class="lb__title" id="lb-title"></h2>
+        <p class="lb__desc" id="lb-desc"></p>
+      </div>
+      <dl class="lb__credits" id="lb-credits"></dl>
+    </div>
+  </div>
+</div>
+
 <script src="i18n.js"></script>
+<script src="projects.js"></script>
 <script src="main.js"></script>
 </body>
 </html>

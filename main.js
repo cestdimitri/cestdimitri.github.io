@@ -21,6 +21,9 @@
   const LANG_KEY = 'da-lang';
   const isGallery = /gallery\.html$/.test(location.pathname);
 
+  /* things that need to react when the language is switched */
+  const langHooks = [];
+
   function translate(lang) {
     const dict = DICT[lang];
     if (!dict) return;
@@ -37,6 +40,15 @@
       if (v !== undefined) el.innerHTML = v;
     });
 
+    /* language-specific artwork, e.g. an EN and RU book cover */
+    $$('[data-img-base]').forEach((pic) => {
+      const base = pic.dataset.imgBase + '-' + lang;
+      const src  = pic.querySelector('source');
+      const img  = pic.querySelector('img');
+      if (src) src.srcset = base + '.webp';
+      if (img) img.src    = base + '.jpg';
+    });
+
     const title = isGallery ? dict['gal.doc.title'] : dict['doc.title'];
     if (title) document.title = title;
     root.setAttribute('lang', lang);
@@ -46,6 +58,8 @@
       b.classList.toggle('is-active', on);
       b.setAttribute('aria-pressed', String(on));
     });
+
+    langHooks.forEach((fn) => fn());
   }
 
   function detectLang() {
@@ -150,6 +164,178 @@
         });
         if (empty) empty.hidden = visible > 0;
       });
+    });
+  }
+
+  /* ── Lightbox ──────────────────────────────────────── */
+  const lb = $('#lightbox');
+
+  if (lb && window.PROJECTS) {
+    const PROJ = window.PROJECTS;
+    const frame   = $('#lb-frame');
+    const capEl   = $('#lb-caption');
+    const thumbs  = $('#lb-thumbs');
+    const idxEl   = $('#lb-index');
+    const totEl   = $('#lb-total');
+    const metaEl  = $('#lb-meta');
+    const titleEl = $('#lb-title');
+    const descEl  = $('#lb-desc');
+    const credEl  = $('#lb-credits');
+    const prevBtn = $('#lb-prev');
+    const nextBtn = $('#lb-next');
+
+    let current = null;   // project object
+    let index   = 0;
+    let opener  = null;   // element to restore focus to
+
+    const t = (key) => {
+      const d = DICT[root.getAttribute('lang')] || DICT.en || {};
+      return d[key] !== undefined ? d[key] : key;
+    };
+
+    const srcFor = (img) => {
+      const lang = root.getAttribute('lang') === 'ru' ? 'ru' : 'en';
+      return img.byLang ? img.base + '-' + lang : img.base;
+    };
+
+    function paintImage() {
+      const img = current.images[index];
+      const src = srcFor(img);
+      frame.innerHTML =
+        '<picture>' +
+          '<source srcset="' + src + '.webp" type="image/webp">' +
+          '<img src="' + src + '.jpg" alt="' + t(img.cap).replace(/"/g, '&quot;') + '">' +
+        '</picture>';
+      capEl.textContent = t(img.cap);
+      idxEl.textContent = String(index + 1);
+      $$('button', thumbs).forEach((b, i) => b.classList.toggle('is-active', i === index));
+    }
+
+    function paintAll() {
+      if (!current) return;
+
+      metaEl.textContent  = t(current.meta);
+      titleEl.textContent = t(current.title);
+      descEl.textContent  = t(current.desc);
+      totEl.textContent   = String(current.images.length);
+
+      credEl.innerHTML = current.credits.map((row) =>
+        '<div><dt>' + t(row[0]) + '</dt><dd>' + t(row[1]) + '</dd></div>'
+      ).join('');
+
+      thumbs.innerHTML = current.images.map((img, i) =>
+        '<li><button type="button" data-i="' + i + '" aria-label="' + (i + 1) + '">' +
+          '<img src="' + srcFor(img) + '.jpg" alt=""></button></li>'
+      ).join('');
+
+      const multi = current.images.length > 1;
+      prevBtn.hidden = nextBtn.hidden = !multi;
+      thumbs.hidden = !multi;
+
+      paintImage();
+    }
+
+    function go(step) {
+      const n = current.images.length;
+      index = (index + step + n) % n;
+      paintImage();
+    }
+
+    function open(id, trigger) {
+      if (!PROJ[id]) return;
+      current = PROJ[id];
+      index   = 0;
+      opener  = trigger || null;
+
+      paintAll();
+      lb.hidden = false;
+      document.body.classList.add('lb-open');
+      $('.lb__close', lb).focus();
+    }
+
+    function close() {
+      lb.hidden = true;
+      document.body.classList.remove('lb-open');
+      current = null;
+      if (opener) { opener.focus(); opener = null; }
+    }
+
+    /* open from a project card */
+    $$('[data-project]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        open(link.dataset.project, link);
+      });
+    });
+
+    /* close */
+    $$('[data-lb-close]', lb).forEach((el) => el.addEventListener('click', close));
+
+    /* navigate */
+    prevBtn.addEventListener('click', () => go(-1));
+    nextBtn.addEventListener('click', () => go(1));
+    thumbs.addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (btn) { index = Number(btn.dataset.i); paintImage(); }
+    });
+
+    /* keyboard: escape, arrows, and a simple focus trap */
+    document.addEventListener('keydown', (e) => {
+      if (lb.hidden) return;
+      if (e.key === 'Escape')     { close(); return; }
+      if (e.key === 'ArrowLeft')  { go(-1);  return; }
+      if (e.key === 'ArrowRight') { go(1);   return; }
+      if (e.key !== 'Tab') return;
+
+      const f = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', lb)
+        .filter((el) => !el.hidden && el.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    /* swipe on touch */
+    let x0 = null;
+    frame.addEventListener('touchstart', (e) => { x0 = e.changedTouches[0].clientX; }, { passive: true });
+    frame.addEventListener('touchend', (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 45) go(dx < 0 ? 1 : -1);
+      x0 = null;
+    }, { passive: true });
+
+    /* redraw when the language changes while open */
+    langHooks.push(() => { if (!lb.hidden && current) paintAll(); });
+  }
+
+  /* ── Stamp perforation ─────────────────────────────── */
+  /* The mask tiles notches at a fixed --step. If the box isn't an
+     exact multiple of that, `mask-repeat:round` rescales each axis
+     independently — the top edge ends up with a different step to
+     the left edge, and the corners stop matching. Rounding the box
+     up to a whole number of steps gives both axes one step, so the
+     four corners are identical. Content-sized, then quantised.   */
+  const paper = $('.stamp__paper');
+  if (paper) {
+    const quantise = () => {
+      paper.style.width = '';
+      paper.style.height = '';
+      const step = parseFloat(getComputedStyle(paper).getPropertyValue('--step')) || 16;
+      // offsetWidth/Height are layout values — unaffected by the rotation
+      paper.style.width  = Math.ceil(paper.offsetWidth  / step) * step + 'px';
+      paper.style.height = Math.ceil(paper.offsetHeight / step) * step + 'px';
+    };
+
+    quantise();
+    // webfonts land after first paint and change the text metrics
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(quantise);
+    langHooks.push(quantise);
+
+    let stampTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(stampTimer);
+      stampTimer = setTimeout(quantise, 150);
     });
   }
 
