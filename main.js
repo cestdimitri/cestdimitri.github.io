@@ -19,7 +19,11 @@
   const DICT     = window.I18N || {};
   const LANGS    = ['en', 'ru'];
   const LANG_KEY = 'da-lang';
-  const isGallery = /gallery\.html$/.test(location.pathname);
+  /* each page names its own <title> key */
+  const PAGE_TITLE_KEY =
+      /gallery\.html$/.test(location.pathname)         ? 'gal.doc.title'
+    : /case-chistetika\.html$/.test(location.pathname) ? 'cs.doc.title'
+    :                                                    'doc.title';
 
   /* things that need to react when the language is switched */
   const langHooks = [];
@@ -40,6 +44,12 @@
       if (v !== undefined) el.innerHTML = v;
     });
 
+    /* labels that aren't visible text still need translating */
+    $$('[data-i18n-aria]').forEach((el) => {
+      const v = dict[el.dataset.i18nAria];
+      if (v !== undefined) el.setAttribute('aria-label', v);
+    });
+
     /* language-specific artwork, e.g. an EN and RU book cover */
     $$('[data-img-base]').forEach((pic) => {
       const base = pic.dataset.imgBase + '-' + lang;
@@ -49,7 +59,7 @@
       if (img) img.src    = base + '.jpg';
     });
 
-    const title = isGallery ? dict['gal.doc.title'] : dict['doc.title'];
+    const title = dict[PAGE_TITLE_KEY];
     if (title) document.title = title;
     root.setAttribute('lang', lang);
 
@@ -90,7 +100,7 @@
       toggle.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
     }
     const meta = $('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', dark ? '#090b12' : '#1B4EF5');
+    if (meta) meta.setAttribute('content', dark ? '#090b12' : '#F4F5F8');
   }
 
   const savedTheme  = store.get(THEME_KEY);
@@ -119,25 +129,6 @@
     revealables.forEach((el) => io.observe(el));
   } else {
     revealables.forEach((el) => el.classList.add('is-in'));
-  }
-
-  /* ── Mobile nav ────────────────────────────────────── */
-  const nav     = $('#nav');
-  const menuBtn = $('#menu-btn');
-
-  if (nav && menuBtn) {
-    const setMenu = (open) => {
-      nav.classList.toggle('is-open', open);
-      menuBtn.setAttribute('aria-expanded', String(open));
-      menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    };
-
-    menuBtn.addEventListener('click', () => {
-      setMenu(menuBtn.getAttribute('aria-expanded') !== 'true');
-    });
-    $$('.nav__link').forEach((a) => a.addEventListener('click', () => setMenu(false)));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
-    window.addEventListener('resize', () => { if (window.innerWidth > 820) setMenu(false); });
   }
 
   /* ── Project filters ───────────────────────────────── */
@@ -268,6 +259,81 @@
       });
     });
 
+    /* ── Card slideshow ──────────────────────────────── */
+    /* Cycles a card through its project's images on hover. Frames
+       are created on first hover, not on load, so the spreads are
+       only fetched once someone shows interest in that card.     */
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    $$('[data-project]').forEach((link) => {
+      const proj   = PROJ[link.dataset.project];
+      const visual = $('.card__visual', link);
+      if (!proj || !visual || !proj.images.length) return;
+
+      let frames = null, dots = null, i = 0, timer = null;
+
+      const build = () => {
+        if (frames) return;
+        // frame 0 is the card's own cover photo, which isn't part of
+        // the case gallery — so every project image is appended after it
+        const first = visual.querySelector('picture');
+        proj.images.forEach((img) => {
+          const src = srcFor(img);
+          const pic = document.createElement('picture');
+          pic.innerHTML =
+            '<source srcset="' + src + '.webp" type="image/webp">' +
+            '<img src="' + src + '.jpg" alt="" loading="lazy" decoding="async">';
+          visual.appendChild(pic);
+        });
+        first.classList.add('is-on');
+
+        dots = document.createElement('span');
+        dots.className = 'card__dots';
+        dots.setAttribute('aria-hidden', 'true');
+        dots.innerHTML = Array.from({ length: proj.images.length + 1 }, (_, n) =>
+          '<i' + (n === 0 ? ' class="is-on"' : '') + '></i>').join('');
+        visual.appendChild(dots);
+
+        frames = $$('picture', visual);
+        visual.classList.add('is-slideshow');   // now safe to hide frames
+      };
+
+      const show = (n) => {
+        i = (n + frames.length) % frames.length;
+        frames.forEach((f, k) => f.classList.toggle('is-on', k === i));
+        $$('i', dots).forEach((d, k) => d.classList.toggle('is-on', k === i));
+      };
+
+      const start = () => {
+        build();
+        if (reduced) return;
+        clearInterval(timer);
+        timer = setInterval(() => show(i + 1), 1400);
+      };
+      const stop = () => { clearInterval(timer); if (frames) show(0); };
+
+      link.addEventListener('mouseenter', start);
+      link.addEventListener('mouseleave', stop);
+      link.addEventListener('focus', start);
+      link.addEventListener('blur', stop);
+    });
+
+    /* language switch has to re-point every built frame */
+    langHooks.push(() => {
+      $$('[data-project]').forEach((link) => {
+        const proj = PROJ[link.dataset.project];
+        if (!proj) return;
+        $$('.card__visual picture', link).forEach((pic, n) => {
+          if (n === 0) return;                  // cover photo carries no text
+          const img = proj.images[n - 1];
+          if (!img || !img.byLang) return;
+          const src = srcFor(img);
+          const s = pic.querySelector('source'); if (s) s.srcset = src + '.webp';
+          const m = pic.querySelector('img');    if (m) m.src    = src + '.jpg';
+        });
+      });
+    });
+
     /* close */
     $$('[data-lb-close]', lb).forEach((el) => el.addEventListener('click', close));
 
@@ -339,25 +405,27 @@
     });
   }
 
-  /* ── Header state, scroll progress, active link ────── */
-  const header   = $('#site-header');
+  /* ── Scroll progress, active dock link, back to top ── */
   const progress = $('#scroll-progress');
+  const toTop    = $('#to-top');
   const sections = $$('main section[id]');
-  const links    = $$('.nav__link');
+  const links    = $$('.dock__link');
   let ticking = false;
 
   function onScroll() {
     const y   = window.scrollY;
     const max = document.documentElement.scrollHeight - window.innerHeight;
 
-    if (header)   header.classList.toggle('is-stuck', y > 12);
     if (progress) progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    // the button only earns its space once there's something to go back to
+    if (toTop) toTop.classList.toggle('is-shown', y > window.innerHeight * 0.6);
 
     if (sections.length) {
       let current = '';
-      sections.forEach((sec) => { if (y >= sec.offsetTop - 140) current = sec.id; });
+      sections.forEach((sec) => { if (y >= sec.offsetTop - 160) current = sec.id; });
       links.forEach((a) => {
-        a.classList.toggle('is-active', a.getAttribute('href') === '#' + current);
+        const href = a.getAttribute('href') || '';
+        a.classList.toggle('is-active', href.slice(href.indexOf('#')) === '#' + current);
       });
     }
 
@@ -368,6 +436,73 @@
     if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
   }, { passive: true });
   onScroll();
+
+  /* ── Version viewer (case study) ───────────────────────
+     The strip shows five page shots at ~150px wide, which is
+     enough to compare silhouettes and useless for reading. A
+     click opens the full-width file in a scrolling overlay —
+     the images are 3,200px tall, so fitting them to the screen
+     would defeat the point. Only the clicked file is fetched. */
+  const zoom = $('#zoom');
+  const shots = $$('.strip__item[data-zoom-src]');
+
+  if (zoom && shots.length) {
+    const zImg    = $('#zoom-img',    zoom);
+    const zSource = $('#zoom-source', zoom);
+    const zLabel  = $('#zoom-label',  zoom);
+    const zDesc   = $('#zoom-desc',   zoom);
+    const scroller = $('.zoom__scroll', zoom);
+    let at = 0;
+    let opener = null;
+
+    const paint = (n) => {
+      at = (n + shots.length) % shots.length;
+      const d = shots[at].dataset;
+      zSource.srcset = d.zoomSrcset || '';
+      zImg.src       = d.zoomSrc;
+      zImg.alt       = '';
+      zLabel.textContent = d.zoomLabel || '';
+      const dict = DICT[root.lang === 'ru' ? 'ru' : 'en'] || {};
+      zDesc.textContent = dict[d.zoomCap] || shots[at].querySelector('.strip__desc').textContent;
+      scroller.scrollTop = 0;
+    };
+
+    const open = (n, from) => {
+      opener = from || null;
+      paint(n);
+      zoom.hidden = false;
+      document.body.classList.add('lb-open');
+      $('.zoom__btn--close', zoom).focus();
+    };
+
+    const close = () => {
+      zoom.hidden = true;
+      document.body.classList.remove('lb-open');
+      if (opener) opener.focus();
+    };
+
+    shots.forEach((btn, n) => {
+      btn.addEventListener('click', () => open(n, btn));
+    });
+
+    /* the close button always closes — its click lands on the inner
+       <svg>, so no target guard. The scroller only closes when the
+       click is on the backdrop itself and not on the image. */
+    $('.zoom__btn--close', zoom).addEventListener('click', close);
+    scroller.addEventListener('click', (e) => { if (e.target === scroller) close(); });
+    $('#zoom-prev', zoom).addEventListener('click', () => paint(at - 1));
+    $('#zoom-next', zoom).addEventListener('click', () => paint(at + 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (zoom.hidden) return;
+      if (e.key === 'Escape')     { close();       }
+      if (e.key === 'ArrowLeft')  { paint(at - 1); }
+      if (e.key === 'ArrowRight') { paint(at + 1); }
+    });
+
+    /* the caption in the overlay is translated copy too */
+    langHooks.push(() => { if (!zoom.hidden) paint(at); });
+  }
 
   /* ── Footer year ───────────────────────────────────── */
   const year = $('#year');

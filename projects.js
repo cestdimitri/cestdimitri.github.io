@@ -33,6 +33,48 @@ window.PROJECTS = {
       ['nos.k.run',     'nos.v.run'],
       ['nos.k.print',   'nos.v.print']
     ]
+  },
+
+  kzine4: {
+    title   : 'p2.title',
+    meta    : 'kz.meta',
+    desc    : 'kz4.desc',
+    images  : [
+      { base: 'images/kzine/issue4',         byLang: true, cap: 'kz4.cap1' },
+      { base: 'images/kzine/issue4-spreads',               cap: 'kz4.cap2' }
+    ],
+    credits : [
+      ['kz.k.role',   'kz.v.role'],
+      ['kz.k.client', 'kz.v.client'],
+      ['kz.k.issue',  'kz4.v.issue'],
+      ['kz.k.authors','kz.v.authors'],
+      ['kz.k.lang',   'kz.v.lang'],
+      ['kz.k.extent', 'kz4.v.extent'],
+      ['kz.k.format', 'kz.v.format'],
+      ['kz.k.run',    'kz4.v.run'],
+      ['kz.k.print',  'kz4.v.print']
+    ]
+  },
+
+  kzine6: {
+    title   : 'p3.title',
+    meta    : 'kz.meta',
+    desc    : 'kz6.desc',
+    images  : [
+      { base: 'images/kzine/issue6',         byLang: true, cap: 'kz6.cap1' },
+      { base: 'images/kzine/issue6-spreads',               cap: 'kz6.cap2' }
+    ],
+    credits : [
+      ['kz.k.role',   'kz.v.role'],
+      ['kz.k.client', 'kz.v.client'],
+      ['kz.k.issue',  'kz6.v.issue'],
+      ['kz.k.authors','kz.v.authors'],
+      ['kz.k.lang',   'kz.v.lang'],
+      ['kz.k.extent', 'kz6.v.extent'],
+      ['kz.k.format', 'kz.v.format'],
+      ['kz.k.run',    'kz6.v.run'],
+      ['kz.k.print',  'kz6.v.print']
+    ]
   }
 
 };
