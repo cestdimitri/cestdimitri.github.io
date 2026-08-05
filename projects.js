@@ -75,6 +75,23 @@ window.PROJECTS = {
       ['kz.k.run',    'kz6.v.run'],
       ['kz.k.print',  'kz6.v.print']
     ]
+  },
+
+  mfff: {
+    title   : 'p7.title',
+    meta    : 'mf.meta',
+    desc    : 'mf.desc',
+    images  : [
+      { base: 'images/mfff/cover',   cap: 'mf.cap1' },
+      { base: 'images/mfff/spreads', cap: 'mf.cap2' }
+    ],
+    credits : [
+      ['mf.k.role',   'mf.v.role'],
+      ['mf.k.client', 'mf.v.client'],
+      ['mf.k.lang',   'mf.v.lang'],
+      ['mf.k.format', 'mf.v.format'],
+      ['mf.k.year',   'mf.v.year']
+    ]
   }
 
 };

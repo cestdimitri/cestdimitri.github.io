@@ -17,3 +17,9 @@ backups/
 
 # scratch
 _probe*/
+
+# tooling scratch — never part of the site
+node_modules/
+package.json
+package-lock.json
+_run.js

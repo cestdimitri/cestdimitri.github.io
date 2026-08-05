@@ -1,5 +1,5 @@
-/* Dimitri Andreenko — portfolio interactions
-   Runs on index.html and gallery.html. Every block is guarded,
+/* Dmitrii Andreenko — portfolio interactions
+   Runs on every page. Every block is guarded,
    so a missing element on one page never breaks the other.      */
 
 (function () {
@@ -437,14 +437,61 @@
   }, { passive: true });
   onScroll();
 
-  /* ── Version viewer (case study) ───────────────────────
+  /* ── Mobile dock menu ──────────────────────────────────
+     The dock keeps burger, language and theme; the links live
+     in a panel above it. Purely a small-screen affordance —
+     above 640 the panel is a plain flex row again and the
+     is-open class means nothing.                          */
+  const dock   = $('.dock');
+  const burger = $('#nav-toggle');
+
+  if (dock && burger) {
+    const setMenu = (open) => {
+      dock.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+
+    burger.addEventListener('click', () => {
+      setMenu(burger.getAttribute('aria-expanded') !== 'true');
+    });
+
+    /* a link is a destination, so following one closes the menu */
+    $$('.dock__link', dock).forEach((a) => a.addEventListener('click', () => setMenu(false)));
+
+    document.addEventListener('click', (e) => {
+      if (!dock.contains(e.target)) setMenu(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && dock.classList.contains('is-open')) {
+        setMenu(false); burger.focus();
+      }
+    });
+    /* rotating the phone can take you past the breakpoint mid-menu */
+    window.matchMedia('(min-width: 641px)').addEventListener('change', (m) => {
+      if (m.matches) setMenu(false);
+    });
+  }
+
+  /* ── Full-size image viewer ────────────────────────────
      The strip shows five page shots at ~150px wide, which is
      enough to compare silhouettes and useless for reading. A
      click opens the full-width file in a scrolling overlay —
      the images are 3,200px tall, so fitting them to the screen
      would defeat the point. Only the clicked file is fetched. */
   const zoom = $('#zoom');
-  const shots = $$('.strip__item[data-zoom-src]');
+
+  /* Every figure image opens too, not just the version strip. Rather
+     than wrapping each <picture> in a button — which would break the
+     `.fig > picture` plate, since picture would stop being a child —
+     the image itself becomes the control.                        */
+  $$('.fig__img, .gal__fig img, .shot__reel img').forEach((img) => {
+    img.classList.add('is-zoomable');
+    img.tabIndex = 0;
+    img.setAttribute('role', 'button');
+  });
+
+  /* one list, in document order, so prev/next walks the page */
+  const shots = $$('.strip__item[data-zoom-src], .is-zoomable');
 
   if (zoom && shots.length) {
     const zImg    = $('#zoom-img',    zoom);
@@ -455,15 +502,41 @@
     let at = 0;
     let opener = null;
 
+    /* a strip button carries its own bigger file and a dictionary key;
+       a figure image carries its own src and a caption element, which
+       is read live so it follows a language switch */
+    const describe = (el) => {
+      if (el.dataset.zoomSrc) {
+        return {
+          src: el.dataset.zoomSrc,
+          srcset: el.dataset.zoomSrcset || '',
+          label: el.dataset.zoomLabel || '',
+          capKey: el.dataset.zoomCap,
+          capEl: el.querySelector('.strip__desc')
+        };
+      }
+      const pic  = el.closest('picture');
+      const fig  = el.closest('figure');
+      const item = el.closest('.pair__item');
+      return {
+        src: el.currentSrc || el.src,
+        srcset: (pic && pic.querySelector('source')) ? pic.querySelector('source').srcset : '',
+        label: item && item.querySelector('.pair__label')
+                 ? item.querySelector('.pair__label').textContent.trim() : '',
+        capKey: null,
+        capEl: fig ? fig.querySelector('figcaption') : null
+      };
+    };
+
     const paint = (n) => {
       at = (n + shots.length) % shots.length;
-      const d = shots[at].dataset;
-      zSource.srcset = d.zoomSrcset || '';
-      zImg.src       = d.zoomSrc;
+      const d = describe(shots[at]);
+      zSource.srcset = d.srcset;
+      zImg.src       = d.src;
       zImg.alt       = '';
-      zLabel.textContent = d.zoomLabel || '';
+      zLabel.textContent = d.label;
       const dict = DICT[root.lang === 'ru' ? 'ru' : 'en'] || {};
-      zDesc.textContent = dict[d.zoomCap] || shots[at].querySelector('.strip__desc').textContent;
+      zDesc.textContent = (d.capKey && dict[d.capKey]) || (d.capEl ? d.capEl.textContent.trim() : '');
       scroller.scrollTop = 0;
     };
 
@@ -481,8 +554,15 @@
       if (opener) opener.focus();
     };
 
-    shots.forEach((btn, n) => {
-      btn.addEventListener('click', () => open(n, btn));
+    shots.forEach((el, n) => {
+      el.addEventListener('click', () => open(n, el));
+      /* the strip items are real buttons; the images are not, so they
+         need Enter and Space wired by hand */
+      if (el.tagName === 'IMG') {
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(n, el); }
+        });
+      }
     });
 
     /* the close button always closes — its click lands on the inner
