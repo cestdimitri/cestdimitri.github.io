@@ -1105,11 +1105,6 @@ body:has(.section--page) .field{ height:min(85vh, 780px); }
 .btn--ghost:hover{ border-color:var(--accent); color:var(--accent); }
 .btn--ghost:hover svg{ transform:translate(3px,-3px); }
 
-.pdf__hint{
-  margin-top:.9rem;
-  font-family:var(--mono); font-size:.6875rem;
-  color:var(--ink-3); letter-spacing:.03em;
-}
 
 /* ── 10. CONTACT ─────────────────────────────────────────── */
 
