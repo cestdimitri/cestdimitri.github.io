@@ -1042,19 +1042,79 @@ body:has(.section--page) .field{ height:min(85vh, 780px); }
 .pdf__sheet--1 svg{ width:100%; height:auto; display:block; }
 .pdf-page{ fill:var(--card); }
 .pdf-ink{ fill:var(--ink); }
-.pdf-accent{ fill:var(--accent-2); }
 
 .pdf:hover .pdf__sheet--3{ transform:translate(22px,-22px) rotate(5deg); }
 .pdf:hover .pdf__sheet--2{ transform:translate(11px,-11px) rotate(2.5deg); }
 
-.pdf__badge{
-  position:absolute; top:clamp(1.5rem,3vw,2.5rem); right:clamp(1.5rem,3vw,2.5rem);
-  transform:translate(35%,-35%);
-  font-family:var(--mono); font-size:.625rem; font-weight:500;
-  letter-spacing:.12em;
-  background:var(--accent-2); color:#fff;
-  padding:.35rem .6rem; border-radius:99px;
+/* The pill became the same postage stamp as the hero CTA, franked onto
+   the corner of the document stack. Fixed 70x70 at a 10px step, so the
+   box is an exact multiple of --step and the four corners come out
+   identical without the JS quantiser the hero one needs.
+
+   As on the hero: the drop-shadow lives on the wrapper, because filter
+   is applied before mask and would otherwise trace the unmasked box
+   rather than the perforated edge.                                   */
+.pdf__stamp{
+  position:absolute;
+  left:77%; top:47.75%;
+  transform:translate(-50%,-50%);
+  filter:var(--stamp-lift);
+  transition:filter .5s var(--ease);
+  pointer-events:none;
 }
+.pdf__stamp-paper{
+  --notch:3.5px;
+  --step:10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:.1rem;
+  width:70px; height:70px;
+  background:var(--stamp);
+  color:var(--stamp-ink);
+  transform:rotate(-8deg);
+  transition:transform .5s var(--ease);
+
+  -webkit-mask:
+    radial-gradient(var(--notch) at 50% 0,    #0000 97%, #000) 0 0    / var(--step) 100%,
+    radial-gradient(var(--notch) at 50% 100%, #0000 97%, #000) 0 100% / var(--step) 100%,
+    radial-gradient(var(--notch) at 0 50%,    #0000 97%, #000) 0 0    / 100% var(--step),
+    radial-gradient(var(--notch) at 100% 50%, #0000 97%, #000) 100% 0 / 100% var(--step);
+  mask:
+    radial-gradient(var(--notch) at 50% 0,    #0000 97%, #000) 0 0    / var(--step) 100%,
+    radial-gradient(var(--notch) at 50% 100%, #0000 97%, #000) 0 100% / var(--step) 100%,
+    radial-gradient(var(--notch) at 0 50%,    #0000 97%, #000) 0 0    / 100% var(--step),
+    radial-gradient(var(--notch) at 100% 50%, #0000 97%, #000) 100% 0 / 100% var(--step);
+  -webkit-mask-composite:source-in;
+  mask-composite:intersect;
+  -webkit-mask-repeat:round;
+  mask-repeat:round;
+
+  outline:1px dashed color-mix(in srgb, var(--stamp-ink) 45%, transparent);
+  outline-offset:-7px;
+}
+.pdf__stamp-main{
+  font-family:var(--mono); font-size:.8125rem; font-weight:500;
+  letter-spacing:.1em;
+}
+.pdf__stamp-sub{
+  font-family:var(--mono); font-size:.5rem;
+  letter-spacing:.08em;
+  opacity:.7;
+}
+/* the sheets fan out and the stamp presses down, together */
+.pdf:hover .pdf__stamp{ filter:var(--stamp-press); transition-duration:.2s; }
+.pdf:hover .pdf__stamp-paper{ transform:rotate(0deg) scale(.93); transition-duration:.2s; }
+
+/* ── the block runs on the stamp's orange, not the site blue ──
+   The fill is 2.87:1, so it only ever carries near-black ink or
+   acts as a shape. Anything that has to be read as orange text
+   uses --warm-ink, the darkened sibling at 4.85:1 on paper.   */
+#portfolio .section-num{ color:var(--warm-ink); }
+#portfolio .btn--solid{ background:var(--stamp); color:var(--stamp-ink); }
+#portfolio .btn--solid:hover{ background:var(--stamp-ink); color:var(--card); }
+#portfolio .btn--ghost:hover{ border-color:var(--warm-ink); color:var(--warm-ink); }
 
 .pdf__lede{
   font-family:var(--serif);
