@@ -1406,6 +1406,14 @@ body:has(.section--page) .field{ height:min(85vh, 780px); }
   white-space:nowrap;
 }
 .lb__credits dd{ font-size:var(--t-sm); text-align:right; }
+/* a credit can carry a link — the global rule strips underlines, so
+   it needs its own affordance to read as one */
+.lb__credits dd a{
+  color:var(--accent);
+  border-bottom:1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  transition:border-color .25s var(--ease);
+}
+.lb__credits dd a:hover{ border-bottom-color:var(--accent); }
 
 body.lb-open{ overflow:hidden; }
 
