@@ -1584,7 +1584,8 @@ body.lb-open{ overflow:hidden; }
    section, so every one of them lines up with the paragraph it belongs
    to. Only the multi-image figures — the version strip, the release
    pair, the v1/v2/v3 stack — still break out to the full width.     */
-.fig--inline{ margin-block:clamp(1.25rem,2.5vw,1.75rem) 0; }
+/* space below too, so a paragraph that follows a figure doesn't sit on its caption */
+.fig--inline{ margin-block:clamp(1.25rem,2.5vw,1.75rem); }
 .fig--inline:last-child{ margin-bottom:0; }
 .fig__grid{
   display:grid;
