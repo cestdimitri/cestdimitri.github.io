@@ -24,8 +24,8 @@
     "sm.head.01": "UX Case · 2025",
     "sm.head.02": "Souz-M Laboratory",
     "sm.head.03": "Making a hidden lab a selling point",
-    "sm.head.04": "Editor — information architecture, UX writing, prototyping",
-    "sm.head.05": "Shulman_prod (visual design), Souz-M laboratory, ADN (development)",
+    "sm.head.04": "Lead editor — research, information architecture, UX writing, wireframes",
+    "sm.head.05": "Shulman_prod (creative direction, visual design)",
     "sm.head.06": "2025",
     "sm.s1.01": "The brief",
     "sm.s1.02": "The ask: a page to host a PDF.",
@@ -202,7 +202,7 @@
     "sm.s8.18": "The page names the test report as proof but never shows one. A single redacted example would do more than the four-step diagram.",
     "sm.s8.19": "Close the loop with product pages.",
     "sm.s8.20": "Each parameter in a fabric’s specifications should link to its explanation here. The page is a dictionary; product pages are where people need it.",
-    "sm.meta.desc": "A landing page that turned an in-house testing lab into a selling point. Information architecture, UX writing and prototyping by Dmitrii Andreenko.",
+    "sm.meta.desc": "A landing page that turned an in-house testing lab into a selling point. Research, information architecture, UX writing and wireframes by Dmitrii Andreenko.",
   };
 
   const RU = {
@@ -216,8 +216,8 @@
     "sm.head.01": "UX-кейс · 2025",
     "sm.head.02": "Лаборатория Souz-M",
     "sm.head.03": "Как сделать скрытую лабораторию аргументом для покупателя",
-    "sm.head.04": "Редактор — информационная архитектура, UX-тексты, прототипирование",
-    "sm.head.05": "Shulman_prod (визуальный дизайн), лаборатория Souz-M, ADN (разработка)",
+    "sm.head.04": "Ведущий редактор — исследование, информационная архитектура, UX-тексты, вайрфреймы",
+    "sm.head.05": "Shulman_prod (креативное руководство, визуальный дизайн)",
     "sm.head.06": "2025",
     "sm.s1.01": "Задача",
     "sm.s1.02": "Запрос звучал так: нужна страница, чтобы разместить PDF.",
@@ -394,7 +394,7 @@
     "sm.s8.18": "Страница называет протокол доказательством, но ни разу его не показывает. Один пример со скрытыми данными убедил бы сильнее, чем схема из четырёх шагов.",
     "sm.s8.19": "Связать страницу с карточками товаров.",
     "sm.s8.20": "Каждый параметр в характеристиках ткани должен вести к своему объяснению здесь. Страница — это словарь, а нужен он там, где человек выбирает ткань, — в карточке товара.",
-    "sm.meta.desc": "Лендинг, который превратил внутреннюю испытательную лабораторию в аргумент для покупателя. Информационная архитектура, UX-тексты и прототипирование — Дмитрий Андреенко.",
+    "sm.meta.desc": "Лендинг, который превратил внутреннюю испытательную лабораторию в аргумент для покупателя. Исследование, информационная архитектура, UX-тексты и вайрфреймы — Дмитрий Андреенко.",
   };
 
   window.I18N = window.I18N || { en: {}, ru: {} };

@@ -141,7 +141,7 @@ window.I18N = {
     'p5.desc'            : 'A landing page for a product category the brand had never sold. Research, information architecture, UX writing, wireframes.',
     'p5.year'            : '2025',
     'p6.title'           : 'Souz-M Laboratory',
-    'p6.desc'            : 'A landing page that turned an in-house testing lab into a selling point. Information architecture, UX writing, prototyping.',
+    'p6.desc'            : 'A landing page that turned an in-house testing lab into a selling point. Research, information architecture, UX writing, wireframes.',
     'p6.year'            : '2025',
 
     'about.title'        : 'About',
@@ -359,7 +359,7 @@ window.I18N = {
     'p5.desc'            : 'Лендинг для категории товаров, которую бренд раньше не продавал. Исследование, информационная архитектура, UX-тексты, вайрфреймы.',
     'p5.year'            : '2025',
     'p6.title'           : 'Лаборатория Souz-M',
-    'p6.desc'            : 'Лендинг, который превратил внутреннюю лабораторию в аргумент для покупателя. Информационная архитектура, UX-тексты, прототипирование.',
+    'p6.desc'            : 'Лендинг, который превратил внутреннюю лабораторию в аргумент для покупателя. Исследование, информационная архитектура, UX-тексты, вайрфреймы.',
     'p6.year'            : '2025',
 
     'about.title'        : 'Обо мне',
