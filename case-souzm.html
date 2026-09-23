@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Souz-M Laboratory — UX case — Dmitrii Andreenko</title>
+<meta data-i18n="sm.meta.desc" name="description" content="A landing page that turned an in-house testing lab into a selling point. Information architecture, UX writing and prototyping by Dmitrii Andreenko.">
+<meta name="theme-color" content="#F4F5F8">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Golos+Text:wght@400;500;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="mask-icon" href="favicon.svg" color="#1B4EF5">
+</head>
+<body>
+
+<div class="field" aria-hidden="true"></div>
+
+<div class="veil" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+<main id="main">
+<section class="section section--page">
+  <div class="wrap panel">
+
+    <p class="masthead reveal">
+      <a href="index.html" data-i18n="brand.name">Dmitrii Andreenko</a>
+    </p>
+
+    <a class="back-link reveal" href="index.html#work">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 19l-7-7 7-7"/></svg>
+      <span data-i18n="sm.back">All work</span>
+    </a>
+
+    <!-- Copy lives in case-souzm.js (EN/RU); the English here is the
+         fallback shown before scripts run. -->
+    <article class="case">
+
+      <header class="case__head reveal">
+        <p data-i18n="sm.head.01" class="case__eyebrow">UX Case · 2025</p>
+        <h1 data-i18n="sm.head.02" class="case__title">Souz-M Laboratory</h1>
+        <p data-i18n="sm.head.03" class="case__sub">Making a hidden lab a selling point</p>
+
+        <dl class="case__meta">
+          <div><dt data-i18n="sm.k.role">Role</dt><dd data-i18n="sm.head.04">Information architecture, UX writing, prototyping</dd></div>
+          <div><dt data-i18n="sm.k.team">Team</dt><dd data-i18n="sm.head.05">Shulman_prod (creative studio, visual design), Souz-M laboratory, ADN (development)</dd></div>
+          <div><dt data-i18n="sm.k.year">Year</dt><dd data-i18n="sm.head.06">2025</dd></div>
+          <div><dt data-i18n="sm.k.live">Live</dt><dd><a href="https://www.souz-m.ru/laboratoriya/" target="_blank" rel="noopener">souz-m.ru/laboratoriya</a></dd></div>
+        </dl>
+      </header>
+
+      <!-- ── 01 brief ─────────────────────────────────── -->
+      <section class="case__sec reveal">
+        <div class="case__aside">
+          <div class="case__rail">
+            <span class="case__num">01</span>
+            <h2 data-i18n="sm.s1.01" class="case__h2">The brief</h2>
+          </div>
+        </div>
+        <div class="case__body">
+          <blockquote data-i18n="sm.s1.02" class="case__quote">The ask: a page to host a PDF.</blockquote>
+          <p data-i18n="sm.s1.03" class="case__p">Souz-M sells upholstery fabrics. Every fabric from Souz-M and its sister brand Chistetika is tested in the company’s own accredited laboratory. The specifications on product pages aren’t copied from suppliers — they’re measured.</p>
+          <p data-i18n="sm.s1.04" class="case__p">That was one of the brand’s strongest competitive advantages, and it wasn’t communicated anywhere.</p>
+          <p data-i18n="sm.s1.05" class="case__p case__p--lead">The task was a landing page for a new laboratory guide. I proposed a page that sells the lab itself and uses the guide as its depth.</p>
+
+          <figure class="fig fig--inline">
+            <picture>
+              <source srcset="images/souzm/cover.webp" type="image/webp">
+              <img data-i18n-alt="sm.s1.06" class="fig__img" src="images/souzm/cover.jpg" alt="The released Souz-M laboratory page: a hero with video of a testing machine and a button to download the full guide as a PDF" fetchpriority="high" decoding="async" width="1416" height="885">
+            </picture>
+            <figcaption class="fig__cap">
+              <span data-i18n="sm.s1.07" class="fig__step">The page</span>
+              <span data-i18n="sm.s1.08">A lab most buyers never knew existed</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ── 02 problem ───────────────────────────────── -->
+      <section class="case__sec reveal">
+        <div class="case__aside">
+          <div class="case__rail">
+            <span class="case__num">02</span>
+            <h2 data-i18n="sm.s2.01" class="case__h2">The problem</h2>
+          </div>
+        </div>
+        <div class="case__body">
+          <ol class="case__points">
+            <li><strong data-i18n="sm.s2.02">The proof spoke the language of the laboratory.</strong>
+                <span data-i18n="sm.s2.03">“Martindale abrasion test” means little to someone choosing fabric for furniture.</span></li>
+            <li><strong data-i18n="sm.s2.04">Numbers without interpretation are useless.</strong>
+                <span data-i18n="sm.s2.05">Is 30,000 cycles a lot or a little? Without a reference point, the number does no work.</span></li>
+            <li><strong data-i18n="sm.s2.06">A laboratory is a process, not a product.</strong>
+                <span data-i18n="sm.s2.07">You can’t put it in a cart. The page had to make invisible work visible.</span></li>
+          </ol>
+
+          <!-- Fig. 02 · the translation gap -->
+          <figure class="fig fig--inline">
+            <div class="dg dg--gap">
+              <div class="dg__gap-row">
+                <div class="dg__card">
+                  <span data-i18n="sm.s2.08" class="dg__label">What the lab measures</span>
+                  <p data-i18n-html="sm.s2.09" class="dg__body">Martindale abrasion test — <span class="dg__fig">30,000</span> cycles</p>
+                </div>
+                <div class="dg__joint" aria-hidden="true"><span class="dg__q">?</span></div>
+                <div class="dg__card">
+                  <span data-i18n="sm.s2.10" class="dg__label">What the buyer asks</span>
+                  <p data-i18n="sm.s2.11" class="dg__body">Will it wear through on a sofa?</p>
+                </div>
+              </div>
+              <div class="dg__bridge" aria-hidden="true"></div>
+              <div class="dg__card dg__gap-goal">
+                <span data-i18n="sm.s2.12" class="dg__label dg__label--key">What the page has to do</span>
+                <p data-i18n="sm.s2.13" class="dg__body">Connect the two.</p>
+              </div>
+            </div>
+          </figure>
+        </div>
+
+      </section>
+
+      <!-- ── 03 starting point ────────────────────────── -->
+      <section class="case__sec reveal">
+        <div class="case__aside">
+          <div class="case__rail">
+            <span class="case__num">03</span>
+            <h2 data-i18n="sm.s3.01" class="case__h2">Starting point</h2>
+          </div>
+        </div>
+        <div class="case__body">
+          <p data-i18n="sm.s3.02" class="case__p">The starting material was a technical description of the testing process: methods, standards and units of measurement. I rewrote it as a guide for a non-specialist reader, and Shulman_prod designed it as a 20-page PDF.</p>
+          <p data-i18n="sm.s3.03" class="case__p">The first version of the page moved that content into the website template: a headline, a definition and a list of seven parameters.</p>
+          <p data-i18n="sm.s3.04" class="case__p case__p--lead">Everything was correct. Nothing worked.</p>
+          <p data-i18n="sm.s3.05" class="case__p">The list answered a question the visitor hadn’t asked.</p>
+          <p data-i18n-html="sm.s3.06" class="case__p"><strong>Who the page is for.</strong> People choosing fabric for furniture. My working hypothesis was that none of them ask about tests. They ask whether a fabric will hold its shape, fade or wear through. It stayed a hypothesis, and the structure was built on it.</p>
+        </div>
+
+        <!-- Fig. 03 · the guide beside the template version -->
+        <figure class="fig fig--pair fig--wide">
+          <div class="fig__grid">
+            <div class="pair__item">
+              <span data-i18n="sm.s3.07" class="pair__label">The guide — page 3 of 20</span>
+              <picture>
+                <source srcset="images/souzm/guide-p03.webp" type="image/webp">
+                <img data-i18n-alt="sm.s3.08" class="fig__img" src="images/souzm/guide-p03.jpg" alt="Spread 3 of the 20-page guide, headed “What are laboratory tests?”, with icons for each property and a photograph of a testing instrument" loading="lazy" decoding="async" width="1600" height="900">
+              </picture>
+            </div>
+            <div class="pair__item">
+              <span data-i18n="sm.s3.09" class="pair__label">v0 — the same content, poured into a template</span>
+              <picture>
+                <source srcset="images/souzm/v0-crop.webp" type="image/webp">
+                <img data-i18n-alt="sm.s3.10" class="fig__img" src="images/souzm/v0-crop.jpg" alt="The first version of the page: a hero slider of fabric rolls, the question “What are laboratory tests?”, and seven laboratory parameters set as a list in capitals; the empty space between the two parts is cut out" loading="lazy" decoding="async" width="1200" height="1016">
+              </picture>
+            </div>
+          </div>
+          <figcaption class="fig__cap">
+            <span data-i18n="sm.s3.11" class="fig__step">v0</span>
+            <span data-i18n="sm.s3.12">Correct, and useless</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ── 04 structure ─────────────────────────────── -->
+      <section class="case__sec reveal">
+        <div class="case__aside">
+          <div class="case__rail">
+            <span class="case__num">04</span>
+            <h2 data-i18n="sm.s4.01" class="case__h2">Structure</h2>
+          </div>
+        </div>
+        <div class="case__body">
+          <p data-i18n="sm.s4.02" class="case__p case__p--lead">The page doesn’t replace the guide. It sells it.</p>
+          <p data-i18n="sm.s4.03" class="case__p">Each section answers one question.</p>
+
+          <!-- Drawn inline rather than exported, like the scheme in the
+               Chistetika case: the labels are copy and the fills are
+               theme tokens, so a file would need four versions. -->
+          <figure class="fig fig--scheme fig--inline">
+            <div class="scheme">
+              <ol data-i18n-aria="sm.s4.04" class="scheme__page" aria-label="The six sections of the page and the question each one answers">
+                <li class="scheme__row" style="--h:50">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">01</span>
+                  <span><span data-i18n="sm.s4.05" class="scheme__b">Hero</span><span data-i18n="sm.s4.06" class="scheme__q">What is this? (with an immediate link to the guide)</span></span>
+                </li>
+                <li class="scheme__row is-key" style="--h:60">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">02</span>
+                  <span><span data-i18n="sm.s4.07" class="scheme__b">What determines quality</span><span data-i18n="sm.s4.08" class="scheme__q">What do you test, and why should I care?</span></span>
+                </li>
+                <li class="scheme__row is-key" style="--h:50">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">03</span>
+                  <span><span data-i18n="sm.s4.09" class="scheme__b">How testing works</span><span data-i18n="sm.s4.10" class="scheme__q">Is this real or just marketing?</span></span>
+                </li>
+                <li class="scheme__row" style="--h:56">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">04</span>
+                  <span><span data-i18n="sm.s4.11" class="scheme__b">Tests on video</span><span data-i18n="sm.s4.12" class="scheme__q">Show me.</span></span>
+                </li>
+                <li class="scheme__row is-key" style="--h:80">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">05</span>
+                  <span><span data-i18n="sm.s4.13" class="scheme__b">Parameters and what they mean</span><span data-i18n="sm.s4.14" class="scheme__q">How do I read the numbers on a fabric page?</span></span>
+                </li>
+                <li class="scheme__row" style="--h:44">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">06</span>
+                  <span><span data-i18n="sm.s4.15" class="scheme__b">The guide</span><span data-i18n="sm.s4.16" class="scheme__q">Where do I get the full story?</span></span>
+                </li>
+              </ol>
+              <p data-i18n="sm.s4.17" class="scheme__key">Marked: the order was the decision — properties first, proof second, parameters third.</p>
+            </div>
+          </figure>
+
+          <p data-i18n="sm.s4.18" class="case__p">The guide is offered twice: in the hero for visitors who came for it, and at the end for those the page convinced. Every parameter ends with a link to the guide. The page works as an index to the PDF.</p>
+
+          <!-- Fig. 05 · the page as an index -->
+          <figure class="fig fig--inline">
+            <div class="dg dg--index">
+              <div class="dg__map">
+                <div class="dg__bar"><b>01</b> <span data-i18n="sm.s4.19">Hero</span>
+                  <span class="dg__out"><span data-i18n="sm.s4.20">Download</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
+                </div>
+                <div class="dg__bar dg__bar--mid"><b>02</b> <span data-i18n="sm.s4.21">What determines quality</span></div>
+                <div class="dg__bar"><b>03</b> <span data-i18n="sm.s4.22">How testing works</span></div>
+                <div class="dg__bar dg__bar--mid"><b>04</b> <span data-i18n="sm.s4.23">Tests on video</span></div>
+                <div class="dg__bar dg__bar--tall"><b>05</b> <span data-i18n="sm.s4.24">Parameters and what they mean</span>
+                  <span class="dg__out dg__out--thin"><span data-i18n="sm.s4.25">Read more in the guide ×8</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
+                </div>
+                <div class="dg__bar"><b>06</b> <span data-i18n="sm.s4.26">The guide</span>
+                  <span class="dg__out"><span data-i18n="sm.s4.27">Download</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
+                </div>
+              </div>
+                <svg class="dg__links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <path class="is-dl" d="M0 6.3 C 50 6.3, 50 50, 100 50"/>
+                <path class="is-dl" d="M0 93.7 C 50 93.7, 50 50, 100 50"/>
+                <path class="is-ref" d="M0 75.4 C 45 75.4, 55 41.0, 100 41.0"/>
+                <path class="is-ref" d="M0 75.4 C 45 75.4, 55 43.6, 100 43.6"/>
+                <path class="is-ref" d="M0 75.4 C 45 75.4, 55 46.2, 100 46.2"/>
+                <path class="is-ref" d="M0 75.4 C 45 75.4, 55 48.8, 100 48.8"/>
+                <path class="is-ref" d="M0 75.4 C 45 75.4, 55 51.4, 100 51.4"/>
+                <path class="is-ref" d="M0 75.4 C 45 75.4, 55 54.0, 100 54.0"/>
+                <path class="is-ref" d="M0 75.4 C 45 75.4, 55 56.6, 100 56.6"/>
+                <path class="is-ref" d="M0 75.4 C 45 75.4, 55 59.2, 100 59.2"/>
+              </svg>
+            <div class="dg__guide">
+                <span class="dg__sheet" aria-hidden="true"></span>
+                <span class="dg__sheet" aria-hidden="true"></span>
+                <span class="dg__sheet" aria-hidden="true"></span>
+                <span data-i18n="sm.s4.28" class="dg__guide-lab">The guide · 20 pages</span>
+              </div>
+            </div>
+            <figcaption class="fig__cap">
+              <span data-i18n="sm.s4.29" class="fig__step">The index</span>
+              <span data-i18n="sm.s4.30">Two entry points, eight shortcuts</span>
+            </figcaption>
+          </figure>
+
+          <h3 data-i18n="sm.s4.31" class="case__h3">How the structure got there</h3>
+        </div>
+
+        <!-- Fig. 06 · six versions. Each reel measures its own image on
+             load (main.js), so any export height works; the inline
+             --travel is only the fallback before it arrives. -->
+        <figure class="fig fig--strip fig--strip6 fig--wide">
+          <div class="fig__grid">
+            <button class="strip__item" type="button"
+                    data-zoom="0"
+                    data-zoom-src="images/souzm/v0.jpg"
+                    data-zoom-srcset="images/souzm/v0.webp"
+                    data-zoom-label="v0">
+              <span data-i18n="sm.s4.32" class="strip__label">v0</span>
+              <span class="strip__win">
+                <picture class="strip__reel" style="--travel:-70.00%; --dur:16s">
+                  <source srcset="images/souzm/v0.webp" type="image/webp">
+                  <img data-i18n-alt="sm.s4.33" src="images/souzm/v0.jpg" alt="Full-page export of v0" loading="lazy" decoding="async" width="1200" height="2607">
+                </picture>
+              </span>
+              <span data-i18n="sm.s4.34" class="strip__desc">Guide content in the website template</span>
+            </button>
+            <button class="strip__item" type="button"
+                    data-zoom="1"
+                    data-zoom-src="images/souzm/v1.jpg"
+                    data-zoom-srcset="images/souzm/v1.webp"
+                    data-zoom-label="v1">
+              <span data-i18n="sm.s4.35" class="strip__label">v1</span>
+              <span class="strip__win">
+                <picture class="strip__reel" style="--travel:-70.00%; --dur:16s">
+                  <source srcset="images/souzm/v1.webp" type="image/webp">
+                  <img data-i18n-alt="sm.s4.36" src="images/souzm/v1.jpg" alt="Full-page export of v1" loading="lazy" decoding="async" width="1200" height="3475">
+                </picture>
+              </span>
+              <span data-i18n="sm.s4.37" class="strip__desc">Properties placed inside the hero; the first two-part parameter card</span>
+            </button>
+            <button class="strip__item" type="button"
+                    data-zoom="2"
+                    data-zoom-src="images/souzm/v2.jpg"
+                    data-zoom-srcset="images/souzm/v2.webp"
+                    data-zoom-label="v2">
+              <span data-i18n="sm.s4.38" class="strip__label">v2</span>
+              <span class="strip__win">
+                <picture class="strip__reel" style="--travel:-70.00%; --dur:16s">
+                  <source srcset="images/souzm/v2.webp" type="image/webp">
+                  <img data-i18n-alt="sm.s4.39" src="images/souzm/v2.jpg" alt="Full-page export of v2, the version handed over" loading="lazy" decoding="async" width="1200" height="3726">
+                </picture>
+              </span>
+              <span data-i18n="sm.s4.40" class="strip__desc">Properties moved out of the hero into their own section: a first screen should do one job. The version I handed over</span>
+            </button>
+            <button class="strip__item" type="button"
+                    data-zoom="3"
+                    data-zoom-src="images/souzm/v3.jpg"
+                    data-zoom-srcset="images/souzm/v3.webp"
+                    data-zoom-label="v3">
+              <span data-i18n="sm.s4.41" class="strip__label">v3</span>
+              <span class="strip__win">
+                <picture class="strip__reel" style="--travel:-70.00%; --dur:16s">
+                  <source srcset="images/souzm/v3.webp" type="image/webp">
+                  <img data-i18n-alt="sm.s4.42" src="images/souzm/v3.jpg" alt="Full-page export of v3" loading="lazy" decoding="async" width="1200" height="3726">
+                </picture>
+              </span>
+              <span data-i18n="sm.s4.43" class="strip__desc">Grey wireframes on the brand’s grid</span>
+            </button>
+            <button class="strip__item" type="button"
+                    data-zoom="4"
+                    data-zoom-src="images/souzm/v4.jpg"
+                    data-zoom-srcset="images/souzm/v4.webp"
+                    data-zoom-label="v4">
+              <span data-i18n="sm.s4.44" class="strip__label">v4</span>
+              <span class="strip__win">
+                <picture class="strip__reel" style="--travel:-70.00%; --dur:16s">
+                  <source srcset="images/souzm/v4.webp" type="image/webp">
+                  <img data-i18n-alt="sm.s4.45" src="images/souzm/v4.jpg" alt="Full-page export of v4" loading="lazy" decoding="async" width="1200" height="3542">
+                </picture>
+              </span>
+              <span data-i18n="sm.s4.46" class="strip__desc">Real laboratory photography</span>
+            </button>
+            <button class="strip__item" type="button"
+                    data-zoom="5"
+                    data-zoom-src="images/souzm/released.jpg"
+                    data-zoom-srcset="images/souzm/released.webp"
+                    data-zoom-label="Released">
+              <span data-i18n="sm.s4.47" class="strip__label">Released</span>
+              <span class="strip__win">
+                <picture class="strip__reel" style="--travel:-70.00%; --dur:16s">
+                  <source srcset="images/souzm/released.webp" type="image/webp">
+                  <img data-i18n-alt="sm.s4.48" src="images/souzm/released.jpg" alt="Full-page export of the released page" loading="lazy" decoding="async" width="1200" height="3574">
+                </picture>
+              </span>
+              <span data-i18n="sm.s4.49" class="strip__desc">Visual design by Shulman_prod</span>
+            </button>
+          </div>
+          <figcaption data-i18n="sm.s4.50" class="fig__cap">Six versions, from template to release.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ── 05 decisions ─────────────────────────────── -->
+      <section class="case__sec reveal">
+        <div class="case__aside">
+          <div class="case__rail">
+            <span class="case__num">05</span>
+            <h2 data-i18n="sm.s5.01" class="case__h2">Decisions</h2>
+          </div>
+        </div>
+        <div class="case__body">
+          <h3 data-i18n="sm.s5.02" class="case__h3">Properties instead of parameters</h3>
+          <p data-i18n="sm.s5.03" class="case__p">The laboratory measures eight parameters. Buyers ask about four properties: weight, strength, colourfastness and abrasion resistance.</p>
+          <p data-i18n="sm.s5.04" class="case__p case__p--lead">I grouped the parameters under these properties and made the properties the tabs.</p>
+        </div>
+
+        <!-- Fig. 07 · the mapping. The key figure of the case, so it
+             gets the full width and the most vertical room. -->
+        <figure class="fig fig--wide">
+          <div class="dg dg--map">
+            <div class="dg__cols">
+              <span data-i18n="sm.s5.05" class="dg__label">How buyers ask</span>
+              <i aria-hidden="true"></i>
+              <span data-i18n="sm.s5.06" class="dg__label">What the lab measures</span>
+            </div>
+
+            <div class="dg__row">
+              <div class="dg__prop">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l3 11H3L6 8z"/><path d="M12 8V5"/><circle cx="12" cy="3.5" r="1.5"/></svg>
+                <span data-i18n="sm.s5.07">Weight</span>
+              </div>
+              <div class="dg__brace"><span class="dg__count">2</span></div>
+              <div class="dg__params">
+                <span data-i18n="sm.s5.08" class="dg__param">Fabric weight</span>
+                <span data-i18n="sm.s5.09" class="dg__param">Thickness</span>
+              </div>
+            </div>
+
+            <div class="dg__row">
+              <div class="dg__prop">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-5 3 10 2-6 2 3h5"/></svg>
+                <span data-i18n="sm.s5.10">Strength</span>
+              </div>
+              <div class="dg__brace"><span class="dg__count">2</span></div>
+              <div class="dg__params">
+                <span data-i18n="sm.s5.11" class="dg__param">Breaking force</span>
+                <span data-i18n="sm.s5.12" class="dg__param">Elongation at break</span>
+              </div>
+            </div>
+
+            <div class="dg__row">
+              <div class="dg__prop">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg>
+                <span data-i18n="sm.s5.13">Colourfastness</span>
+              </div>
+              <div class="dg__brace"><span class="dg__count">1</span></div>
+              <div class="dg__params">
+                <span data-i18n="sm.s5.14" class="dg__param">Colourfastness to light</span>
+              </div>
+            </div>
+
+            <div class="dg__row">
+              <div class="dg__prop">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><path d="M12 4.5v15M4.5 12h15"/></svg>
+                <span data-i18n="sm.s5.15">Abrasion resistance</span>
+              </div>
+              <div class="dg__brace"><span class="dg__count">3</span></div>
+              <div class="dg__params">
+                <span data-i18n="sm.s5.16" class="dg__param">Pilling resistance</span>
+                <span data-i18n="sm.s5.17" class="dg__param">Martindale abrasion test</span>
+                <span class="dg__param"><span data-i18n="sm.s5.18">Flex resistance</span> <span data-i18n="sm.s5.19" class="dg__tag">faux leather</span></span>
+              </div>
+            </div>
+          </div>
+          <figcaption class="fig__cap">
+            <span data-i18n="sm.s5.20" class="fig__step">The translation</span>
+            <span data-i18n="sm.s5.21">Four questions, eight answers</span>
+          </figcaption>
+        </figure>
+
+        <div class="case__body">
+          <p data-i18n="sm.s5.22" class="case__p">The groups follow the buyer’s question, not the lab’s taxonomy. That’s why one tab holds three parameters and another holds one. Flex resistance applies to faux leather rather than fabric, so it went where a buyer would look for it: under wear.</p>
+          <p data-i18n="sm.s5.23" class="case__p case__p--lead">The visitor enters through a familiar word and leaves with the technical term they’ll now recognise on a product page. Everything else on the page depends on this translation.</p>
+
+          <h3 data-i18n="sm.s5.24" class="case__h3">Two questions for every parameter</h3>
+          <p data-i18n="sm.s5.25" class="case__p">Each parameter answers two questions. First: what is it, and how is it measured? Second: what does it mean for furniture?</p>
+          <p data-i18n="sm.s5.26" class="case__p case__p--lead">A number becomes an argument only when its consequence is stated next to it.</p>
+
+          <!-- Fig. 09 · anatomy of a parameter card, rebuilt in markup
+               rather than screenshotted, so the two halves can be
+               labelled without covering the copy they describe. -->
+          <figure class="fig fig--inline">
+            <div class="dg">
+              <div class="dg__anat">
+                <p data-i18n-html="sm.s5.27" class="dg__anat-top"><span class="dg__fig">Parameter 3</span> Breaking force</p>
+                <div class="dg__split">
+                  <div class="dg__half">
+                    <span data-i18n="sm.s5.28" class="dg__label">What it is</span>
+                    <p data-i18n-html="sm.s5.29" class="dg__body">The maximum force a fabric withstands when stretched until it breaks. Measured in newtons <span class="dg__fig">(N)</span>.</p>
+                  </div>
+                  <div class="dg__half">
+                    <span data-i18n="sm.s5.30" class="dg__label dg__label--key">What it means</span>
+                    <p data-i18n="sm.s5.31" class="dg__body">The higher the breaking force, the stronger the fabric: it withstands tension better, deforms less and holds its seams longer.</p>
+                  </div>
+                </div>
+                <p class="dg__anat-foot"><span data-i18n="sm.s5.32">Read more in the guide</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+                </p>
+              </div>
+            </div>
+            <figcaption class="fig__cap">
+              <span data-i18n="sm.s5.33" class="fig__step">Anatomy</span>
+              <span data-i18n="sm.s5.34">Definition on the left, consequence on the right</span>
+            </figcaption>
+          </figure>
+
+          <p data-i18n="sm.s5.35" class="case__p">I tested three layouts for the card: vertical, visualised and two-column. In the released design, Shulman_prod turned the two halves into an expandable accordion, so eight parameters don’t become a wall of text.</p>
+        </div>
+
+        <!-- Fig. 10 · three card explorations -->
+        <figure class="fig fig--trio fig--wide">
+          <div class="fig__grid">
+            <div class="pair__item">
+              <span data-i18n="sm.s5.36" class="pair__label">v1 — vertical</span>
+              <picture>
+                <source srcset="images/souzm/card-v1.webp" type="image/webp">
+                <img data-i18n-alt="sm.s5.37" class="fig__img" src="images/souzm/card-v1.jpg" alt="Parameter card exploration v1: a vertical blue card for fabric weight with property chips" loading="lazy" decoding="async" width="898" height="1086">
+              </picture>
+            </div>
+            <div class="pair__item">
+              <span data-i18n="sm.s5.38" class="pair__label">v2 — visualised</span>
+              <picture>
+                <source srcset="images/souzm/card-v2.webp" type="image/webp">
+                <img data-i18n-alt="sm.s5.39" class="fig__img" src="images/souzm/card-v2.jpg" alt="Parameter card exploration v2: a card with a green visualisation of the fabric surface" loading="lazy" decoding="async" width="1230" height="1060">
+              </picture>
+            </div>
+            <div class="pair__item">
+              <span data-i18n="sm.s5.40" class="pair__label">v3 — two-column</span>
+              <picture>
+                <source srcset="images/souzm/card-v3.webp" type="image/webp">
+                <img data-i18n-alt="sm.s5.41" class="fig__img" src="images/souzm/card-v3.jpg" alt="Parameter card exploration v3: a two-column card with a grey header and a blue interpretation half" loading="lazy" decoding="async" width="1230" height="300">
+              </picture>
+            </div>
+          </div>
+        </figure>
+
+        <div class="case__body">
+          <!-- Fig. 11 · the released section -->
+          <figure class="fig fig--inline">
+            <picture>
+              <source srcset="images/souzm/params-released.webp" type="image/webp">
+              <img data-i18n-alt="sm.s5.42" class="fig__img" src="images/souzm/params-released.jpg" alt="The released dark “Parameters and what they mean” section, with the first item expanded" loading="lazy" decoding="async" width="1488" height="918">
+            </picture>
+            <figcaption class="fig__cap">
+              <span data-i18n="sm.s5.43" class="fig__step">Released</span>
+              <span data-i18n="sm.s5.44">The accordion, by Shulman_prod</span>
+            </figcaption>
+          </figure>
+
+          <h3 data-i18n="sm.s5.45" class="case__h3">Process as proof</h3>
+          <p data-i18n="sm.s5.46" class="case__p">Four steps — preparation, testing, documentation, release to market — aren’t there to explain the process. They prove that “tested” means there is a test report behind the claim.</p>
+          <p data-i18n="sm.s5.47" class="case__p case__p--lead">That’s why the test report is named in the page’s opening paragraph.</p>
+
+          <!-- Fig. 12 · the process strip, with the third step called out.
+               The four --m* values below place the box: tune them against
+               the real export rather than editing the stylesheet. -->
+          <figure class="fig fig--inline">
+            <div class="fig__over" style="--mx:.505; --mw:.23; --my:.15; --mb:.17">
+              <picture>
+                <source srcset="images/souzm/process.webp" type="image/webp">
+                <img data-i18n-alt="sm.s5.48" class="fig__img" src="images/souzm/process.jpg" alt="The four-step process strip from the live page: preparation, testing, documentation, release to market" loading="lazy" decoding="async" width="1400" height="350">
+              </picture>
+              <span class="fig__mark" aria-hidden="true"><span data-i18n="sm.s5.49">the proof</span></span>
+            </div>
+            <figcaption class="fig__cap">
+              <span data-i18n="sm.s5.50" class="fig__step">Proof</span>
+              <span data-i18n="sm.s5.51">The third step carries the argument</span>
+            </figcaption>
+          </figure>
+
+        </div>
+      </section>
+
+      <!-- ── 06 language ──────────────────────────────── -->
+      <section class="case__sec reveal">
+        <div class="case__aside">
+          <div class="case__rail">
+            <span class="case__num">06</span>
+            <h2 data-i18n="sm.s6.01" class="case__h2">Language</h2>
+          </div>
+        </div>
+        <div class="case__body">
+          <p data-i18n="sm.s6.02" class="case__p">The technical material had to be rewritten without losing accuracy.</p>
+          <p data-i18n="sm.s6.03" class="case__p">“Pilling” stayed, with a plain explanation: small balls of tangled fibre.</p>
+          <p data-i18n="sm.s6.04" class="case__p">Five-point scales got a threshold, so a score means something:</p>
+          <blockquote data-i18n="sm.s6.05" class="case__quote">A score below 4 means the material will lose its colour quickly.</blockquote>
+          <p data-i18n="sm.s6.06" class="case__p case__p--lead">The goal wasn’t to remove terminology. It was to make every term interpretable.</p>
+
+          <!-- Fig. 14 · before and after -->
+          <figure class="fig fig--inline">
+            <div class="dg dg--duo">
+              <div class="dg__card dg__card--muted">
+                <span data-i18n="sm.s6.07" class="dg__label">v0 · the template</span>
+                <p data-i18n="sm.s6.08" class="dg__body dg__body--muted">RESISTANCE TO FUZZING AND PILLING</p>
+              </div>
+              <div class="dg__card">
+                <span data-i18n="sm.s6.09" class="dg__label dg__label--key">Released · Parameter 6</span>
+                <p data-i18n="sm.s6.10" class="dg__body">How well a fabric keeps its surface smooth and resists pilling — small balls of tangled fibre — in use. Rated on a five-point scale. A score below 4 means the material is prone to pilling.</p>
+              </div>
+            </div>
+            <figcaption class="fig__cap">
+              <span data-i18n="sm.s6.11" class="fig__step">Before / after</span>
+              <span data-i18n="sm.s6.12">Same fact, different reader</span>
+            </figcaption>
+          </figure>
+
+          <!-- Fig. 15 · the threshold -->
+          <figure class="fig fig--inline">
+            <div class="dg">
+              <div class="dg__scale">
+                <span class="dg__step">1</span>
+                <span class="dg__step">2</span>
+                <span class="dg__step">3</span>
+                <span class="dg__thresh" aria-hidden="true"></span>
+                <span class="dg__step is-on">4</span>
+                <span class="dg__step is-on">5</span>
+              </div>
+              <p data-i18n="sm.s6.13" class="dg__note">Below 4: fades fast.</p>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ── 07 after handoff ─────────────────────────── -->
+      <section class="case__sec reveal">
+        <div class="case__aside">
+          <div class="case__rail">
+            <span class="case__num">07</span>
+            <h2 data-i18n="sm.s7.01" class="case__h2">After handoff</h2>
+          </div>
+        </div>
+        <div class="case__body">
+          <p data-i18n="sm.s7.02" class="case__p">I didn’t create the visual design. The structure, section order and copy went to production unchanged.</p>
+          <p data-i18n="sm.s7.03" class="case__p">Shulman_prod added the visual layer the structure left room for: laboratory photography in the tabs, process icons and a dark parameter section over an interior photograph. That last move takes the conversation from the lab back to the room: from how a fabric is tested to why it matters.</p>
+        </div>
+
+        <!-- Fig. 16 · handover beside release. The left reel reuses the
+             v2 export from Fig. 06 — it is the same frame. -->
+        <figure class="fig fig--pair fig--pair45 fig--wide">
+          <div class="fig__grid">
+            <div class="pair__item">
+              <span data-i18n="sm.s7.04" class="pair__label">v2 — the version I handed over</span>
+              <div class="shot">
+                <div class="shot__window">
+                  <picture class="shot__reel" style="--travel:-68.75%; --dur:30s">
+                    <source srcset="images/souzm/v2.webp" type="image/webp">
+                    <img data-i18n-alt="sm.s7.05" src="images/souzm/v2.jpg" alt="The full v2 prototype, the version handed to the design studio" loading="lazy" decoding="async" width="1200" height="3726">
+                  </picture>
+                </div>
+              </div>
+            </div>
+            <div class="pair__item">
+              <span data-i18n="sm.s7.06" class="pair__label">Released — souz-m.ru/laboratoriya</span>
+              <div class="shot">
+                <div class="shot__window">
+                  <picture class="shot__reel" style="--travel:-68.75%; --dur:30s">
+                    <source srcset="images/souzm/live-full.webp" type="image/webp">
+                    <img data-i18n-alt="sm.s7.07" src="images/souzm/live-full.jpg" alt="The released page in full, scrolled from top to bottom" loading="lazy" decoding="async" width="1200" height="4436">
+                  </picture>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption data-i18n="sm.s7.08" class="fig__cap">Structure unchanged, visual layer added.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ── 08 result ────────────────────────────────── -->
+      <section class="case__sec case__sec--end reveal">
+        <div class="case__aside">
+          <div class="case__rail">
+            <span class="case__num">08</span>
+            <h2 data-i18n="sm.s8.01" class="case__h2">Result</h2>
+          </div>
+        </div>
+        <div class="case__body">
+          <p data-i18n="sm.s8.02" class="case__p">The page is live at souz-m.ru/laboratoriya and linked from the site menu and footer.</p>
+          <p data-i18n="sm.s8.03" class="case__p">I don’t have access to the page’s analytics, so there are no numbers here. The result I can show is the one the brief was about.</p>
+          <p data-i18n="sm.s8.04" class="case__p">Before, the laboratory was the brand’s strongest advantage and existed only inside the company — in test reports no buyer would ever read.</p>
+          <p data-i18n="sm.s8.05" class="case__p case__p--lead">Now it has a public page, a vocabulary and a guide. Every property the brand claims for a fabric can point to a test, and every test to a plain-language explanation. That is what the brand needed to position its fabrics on measured data rather than adjectives.</p>
+
+          <!-- Fig. 17 · before and after -->
+          <figure class="fig fig--inline">
+            <div class="dg dg--duo">
+              <div class="dg__card dg__card--muted">
+                <span data-i18n="sm.s8.06" class="dg__label">Before</span>
+                <div class="dg__icons dg__icons--muted">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+                </div>
+                <ul class="dg__list">
+                  <li data-i18n="sm.s8.07">Test reports</li>
+                  <li data-i18n="sm.s8.08">Internal only</li>
+                  <li data-i18n="sm.s8.09">Lab language</li>
+                </ul>
+              </div>
+              <div class="dg__card dg__card--key">
+                <span data-i18n="sm.s8.10" class="dg__label dg__label--key">After</span>
+                <div class="dg__icons">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h5v18H6a2 2 0 0 1-2-2V5z"/><path d="M20 5a2 2 0 0 0-2-2h-5v18h5a2 2 0 0 0 2-2V5z"/></svg>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/><path d="M12 11v6M9.5 14.5 12 17l2.5-2.5"/></svg>
+                </div>
+                <ul class="dg__list">
+                  <li data-i18n="sm.s8.11">Public page</li>
+                  <li data-i18n="sm.s8.12">4 properties, 8 parameters explained</li>
+                  <li data-i18n="sm.s8.13">20-page guide</li>
+                </ul>
+              </div>
+            </div>
+          </figure>
+
+          <h3 data-i18n="sm.s8.14" class="case__h3">What I’d do next</h3>
+          <ol class="case__points">
+            <li><strong data-i18n="sm.s8.15">Thresholds for every scale.</strong>
+                <span data-i18n="sm.s8.16">The page answers “is 4 out of 5 good?” but not “are 30,000 Martindale cycles good?” The next step is reference ranges: household use vs. heavy use.</span></li>
+            <li><strong data-i18n="sm.s8.17">Show a real test report.</strong>
+                <span data-i18n="sm.s8.18">The page names the test report as proof but never shows one. A single redacted example would do more than the four-step diagram.</span></li>
+            <li><strong data-i18n="sm.s8.19">Close the loop with product pages.</strong>
+                <span data-i18n="sm.s8.20">Each parameter in a fabric’s specifications should link to its explanation here. The page is a dictionary; product pages are where people need it.</span></li>
+          </ol>
+        </div>
+      </section>
+
+    </article>
+
+    <p class="case__next reveal">
+      <a class="back-link back-link--next" href="case-chistetika.html">
+        <span data-i18n="sm.next">Next case — Chistetika Lab</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </p>
+
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>&copy; <span id="year">2026</span> <span data-i18n="brand.name">Dmitrii Andreenko</span></p>
+    <a href="index.html" class="to-top" data-i18n="gal.home">Home</a>
+  </div>
+</footer>
+
+<!-- ────────────────  FULL-SIZE IMAGE VIEWER  ───────────────
+     Opened by the version strip. The image is taller than any
+     screen, so the overlay scrolls rather than trying to fit. -->
+<div class="zoom" id="zoom" hidden>
+  <div class="zoom__bar">
+    <span class="zoom__label" id="zoom-label">v0</span>
+    <span class="zoom__desc" id="zoom-desc"></span>
+    <button class="zoom__btn" type="button" id="zoom-prev" data-i18n-aria="zoom.prev" aria-label="Previous version">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <button class="zoom__btn" type="button" id="zoom-next" data-i18n-aria="zoom.next" aria-label="Next version">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+    <button class="zoom__btn zoom__btn--close" type="button" data-zoom-close data-i18n-aria="zoom.close" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="zoom__scroll" data-zoom-close>
+    <picture class="zoom__pic">
+      <source id="zoom-source" srcset="" type="image/webp">
+      <img id="zoom-img" src="" alt="">
+    </picture>
+  </div>
+</div>
+
+<!-- ─────────────────────────  DOCK  ───────────────────────── -->
+<div class="dock-zone">
+  <nav class="dock" aria-label="Primary">
+    <div class="dock__rail" aria-hidden="true">
+      <div class="dock__progress" id="scroll-progress"></div>
+    </div>
+
+    <button class="dock__burger" type="button" id="nav-toggle"
+            aria-expanded="false" aria-controls="dock-nav"
+            data-i18n-aria="nav.menu" aria-label="Menu">
+      <span class="dock__burger-i" aria-hidden="true"></span>
+    </button>
+
+    <ul class="dock__nav" id="dock-nav">
+      <li><a href="index.html#work"      class="dock__link" data-i18n="nav.work">Work</a></li>
+      <li><a href="index.html#about"     class="dock__link" data-i18n="nav.about">About</a></li>
+      <li><a href="index.html#practice"  class="dock__link" data-i18n="nav.practice">Practice</a></li>
+      <li><a href="index.html#portfolio" class="dock__link" data-i18n="nav.pdf">PDF</a></li>
+      <li><a href="index.html#contact"   class="dock__link" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+
+    <span class="dock__sep" aria-hidden="true"></span>
+
+    <div class="lang" role="group" aria-label="Language / Язык">
+      <button class="lang__btn is-active" type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button class="lang__btn" type="button" data-lang="ru" aria-pressed="false">RU</button>
+    </div>
+
+    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+      <svg class="icon icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2v2.6M12 19.4V22M22 12h-2.6M4.6 12H2M19.07 4.93l-1.84 1.84M6.77 17.23l-1.84 1.84M19.07 19.07l-1.84-1.84M6.77 6.77L4.93 4.93"/></g></svg>
+      <svg class="icon icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+    </button>
+  </nav>
+
+  <a class="dock-top" href="#main" id="to-top" data-i18n-aria="footer.top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5M5 12l7-7 7 7"/></svg>
+  </a>
+</div>
+
+<script src="i18n.js"></script>
+<script src="case-souzm.js"></script>
+<script src="projects.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

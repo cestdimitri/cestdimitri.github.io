@@ -23,6 +23,7 @@
   const PAGE_TITLE_KEY =
       /gallery\.html$/.test(location.pathname)         ? 'gal.doc.title'
     : /case-chistetika\.html$/.test(location.pathname) ? 'cs.doc.title'
+    : /case-souzm\.html$/.test(location.pathname)      ? 'sm.doc.title'
     :                                                    'doc.title';
 
   /* things that need to react when the language is switched */
@@ -42,6 +43,11 @@
     $$('[data-i18n-html]').forEach((el) => {
       const v = dict[el.dataset.i18nHtml];
       if (v !== undefined) el.innerHTML = v;
+    });
+
+    $$('[data-i18n-alt]').forEach((el) => {
+      const v = dict[el.dataset.i18nAlt];
+      if (v !== undefined) el.setAttribute('alt', v);
     });
 
     /* labels that aren't visible text still need translating */
@@ -472,6 +478,28 @@
     });
   }
 
+  /* ── Scrolling windows: travel from the image itself ─────
+     A reel slides by a percentage of its own height, so the right
+     distance depends only on two ratios: the image's and the
+     window's. Hand-typed --travel values went stale every time a
+     screenshot was re-exported; measuring after load means a new
+     file of any size just works. The inline value stays as the
+     fallback until the image arrives.                          */
+  $$('.strip__reel, .shot__reel').forEach((reel) => {
+    const img = $('img', reel);
+    const win = reel.parentElement;
+    if (!img || !win) return;
+    const fit = () => {
+      if (!img.naturalWidth || !win.clientWidth) return;
+      const ir = img.naturalHeight / img.naturalWidth;
+      const wr = win.clientHeight / win.clientWidth;
+      const t  = ir > wr ? -(ir - wr) / ir * 100 : 0;
+      reel.style.setProperty('--travel', t.toFixed(2) + '%');
+    };
+    if (img.complete) fit();
+    else img.addEventListener('load', fit, { once: true });
+  });
+
   /* ── Full-size image viewer ────────────────────────────
      The strip shows five page shots at ~150px wide, which is
      enough to compare silhouettes and useless for reading. A
@@ -510,7 +538,7 @@
         return {
           src: el.dataset.zoomSrc,
           srcset: el.dataset.zoomSrcset || '',
-          label: el.dataset.zoomLabel || '',
+          label: ($('.strip__label', el) || {}).textContent || el.dataset.zoomLabel || '',   /* the visible label, so it follows the language */
           capKey: el.dataset.zoomCap,
           capEl: el.querySelector('.strip__desc')
         };
