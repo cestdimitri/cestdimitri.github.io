@@ -21,12 +21,12 @@
     'cs.sub'        : 'Research, structure and copy for a new product category',
 
     'cs.k.role'     : 'Role',
-    'cs.v.role'     : 'Lead editor & UX writer — research, structure, all copy, wireframes',
+    'cs.v.role'     : 'Lead editor — research, information architecture, UX writing, wireframes',
     'cs.k.team'     : 'Team',
-    'cs.v.team'     : 'Shulman_prod (creative studio: creative director, visual designer), client’s art director, formula technologists',
+    'cs.v.team'     : 'Shulman_prod (creative direction, visual design), client’s art director, formula technologists',
     'cs.next'       : 'Next case — Souz-M Laboratory',
     'cs.k.year'     : 'Year',
-    'cs.v.year'     : '2025 · 2–3 weeks · 3 review rounds',
+    'cs.v.year'     : '2025',
     'cs.k.live'     : 'Live',
     'cs.v.live'     : 'chistetika.ru/lab',
 
@@ -130,12 +130,12 @@
     'cs.sub'        : 'Исследование, структура и тексты для новой категории продуктов',
 
     'cs.k.role'     : 'Роль',
-    'cs.v.role'     : 'Ведущий редактор и UX-редактор — исследование, структура, все тексты, прототипы',
+    'cs.v.role'     : 'Ведущий редактор — исследование, информационная архитектура, UX-тексты, вайрфреймы',
     'cs.k.team'     : 'Команда',
-    'cs.v.team'     : 'Shulman_prod (креативная студия: креативный директор, визуальный дизайнер), арт-директор клиента, технологи производителя',
+    'cs.v.team'     : 'Shulman_prod (креативное руководство, визуальный дизайн), арт-директор клиента, технологи производителя',
     'cs.next'       : 'Следующий кейс — Souz-M Laboratory',
     'cs.k.year'     : 'Год',
-    'cs.v.year'     : '2025 · 2–3 недели · 3 раунда правок',
+    'cs.v.year'     : '2025',
     'cs.k.live'     : 'Ссылка',
     'cs.v.live'     : 'chistetika.ru/lab',
 
