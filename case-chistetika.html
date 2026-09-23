@@ -9,7 +9,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Golos+Text:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Victor+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Golos+Text:wght@400;500;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="mask-icon" href="favicon.svg" color="#1B4EF5">
@@ -45,7 +45,7 @@
 
         <dl class="case__meta">
           <div><dt data-i18n="cs.k.role">Role</dt><dd data-i18n="cs.v.role">Lead editor &amp; UX writer</dd></div>
-          <div><dt data-i18n="cs.k.team">Team</dt><dd data-i18n="cs.v.team">Creative director, visual designer, art director, technologists</dd></div>
+          <div><dt data-i18n="cs.k.team">Team</dt><dd data-i18n="cs.v.team">Shulman_prod (creative studio: creative director, visual designer), client’s art director, formula technologists</dd></div>
           <div><dt data-i18n="cs.k.year">Year</dt><dd data-i18n="cs.v.year">2025</dd></div>
           <div><dt data-i18n="cs.k.live">Live</dt><dd><a href="https://chistetika.ru/lab" target="_blank" rel="noopener" data-i18n="cs.v.live">chistetika.ru/lab</a></dd></div>
         </dl>
@@ -139,55 +139,39 @@
                version, and neither would follow the dark theme. As markup
                it reads from the same dictionary as everything else. -->
           <figure class="fig fig--scheme fig--inline">
-            <svg class="scheme" viewBox="0 0 900 500" role="img"
-                 data-i18n-aria="cs.f5.cap" aria-label="Final block order and the reasoning behind it">
-              <g class="scheme__page">
-                <rect x="8" y="8" width="150" height="470" rx="10"/>
-              </g>
-              <g>
-                <!-- 1 -->
-                <rect class="scheme__blk" x="20" y="22" width="126" height="48" rx="5"/>
-                <text class="scheme__n"  x="196" y="42">01</text>
-                <text class="scheme__b"  x="236" y="42" data-i18n="cs.dia.b1">Presentation</text>
-                <text class="scheme__q"  x="236" y="62" data-i18n="cs.dia.q1">What is this?</text>
-                <!-- 2 -->
-                <rect class="scheme__blk" x="20" y="80" width="126" height="42" rx="5"/>
-                <text class="scheme__n"  x="196" y="98">02</text>
-                <text class="scheme__b"  x="236" y="98" data-i18n="cs.dia.b2">Product benefits</text>
-                <text class="scheme__q"  x="236" y="118" data-i18n="cs.dia.q2">Why should I look?</text>
-                <!-- 3 · a placement decision -->
-                <rect class="scheme__blk is-key" x="20" y="132" width="126" height="52" rx="5"/>
-                <text class="scheme__n is-key" x="196" y="154">03</text>
-                <text class="scheme__b is-key" x="236" y="154" data-i18n="cs.dia.b3">About the brand</text>
-                <text class="scheme__q"  x="236" y="174" data-i18n="cs.dia.q3">Why trust you with this?</text>
-                <!-- 4 -->
-                <rect class="scheme__blk" x="20" y="194" width="126" height="56" rx="5"/>
-                <text class="scheme__n"  x="196" y="216">04</text>
-                <text class="scheme__b"  x="236" y="216" data-i18n="cs.dia.b4">Use cases, in photographs</text>
-                <text class="scheme__q"  x="236" y="236" data-i18n="cs.dia.q4">Where does it fit my life?</text>
-                <!-- 5 -->
-                <rect class="scheme__blk" x="20" y="260" width="126" height="76" rx="5"/>
-                <text class="scheme__n"  x="196" y="292">05</text>
-                <text class="scheme__b"  x="236" y="292" data-i18n="cs.dia.b5">Product card</text>
-                <text class="scheme__q"  x="236" y="312" data-i18n="cs.dia.q5">What exactly am I buying, and how do I use it?</text>
-                <!-- 6 · a placement decision -->
-                <rect class="scheme__blk is-key" x="20" y="346" width="126" height="40" rx="5"/>
-                <text class="scheme__n is-key" x="196" y="364">06</text>
-                <text class="scheme__b is-key" x="236" y="364" data-i18n="cs.dia.b6">Where to buy</text>
-                <text class="scheme__q"  x="236" y="384" data-i18n="cs.dia.q6">Where do I actually get it?</text>
-                <!-- 7 -->
-                <rect class="scheme__blk" x="20" y="396" width="126" height="70" rx="5"/>
-                <text class="scheme__n"  x="196" y="424">07</text>
-                <text class="scheme__b"  x="236" y="424" data-i18n="cs.dia.b7">Composition</text>
-                <text class="scheme__q"  x="236" y="444" data-i18n="cs.dia.q7">What is actually in it?</text>
-              </g>
-              <!-- the two blocks whose position was argued for -->
-              <g class="scheme__mark">
-                <path d="M162 158 h 26"/>
-                <path d="M162 366 h 26"/>
-              </g>
-              <text class="scheme__key" x="8" y="496" data-i18n="cs.dia.key">Marked: the two blocks whose position was the decision.</text>
-            </svg>
+            <div class="scheme">
+              <ol class="scheme__page" data-i18n-aria="cs.f5.cap" aria-label="Final block order and the reasoning behind it">
+                <li class="scheme__row" style="--h:48">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">01</span>
+                  <span><span class="scheme__b" data-i18n="cs.dia.b1">Presentation</span><span class="scheme__q" data-i18n="cs.dia.q1">What is this?</span></span>
+                </li>
+                <li class="scheme__row" style="--h:42">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">02</span>
+                  <span><span class="scheme__b" data-i18n="cs.dia.b2">Product benefits</span><span class="scheme__q" data-i18n="cs.dia.q2">Why should I look?</span></span>
+                </li>
+                <li class="scheme__row is-key" style="--h:52">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">03</span>
+                  <span><span class="scheme__b" data-i18n="cs.dia.b3">About the brand</span><span class="scheme__q" data-i18n="cs.dia.q3">Why trust you with this?</span></span>
+                </li>
+                <li class="scheme__row" style="--h:56">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">04</span>
+                  <span><span class="scheme__b" data-i18n="cs.dia.b4">Use cases, in photographs</span><span class="scheme__q" data-i18n="cs.dia.q4">Where does it fit my life?</span></span>
+                </li>
+                <li class="scheme__row" style="--h:76">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">05</span>
+                  <span><span class="scheme__b" data-i18n="cs.dia.b5">Product card</span><span class="scheme__q" data-i18n="cs.dia.q5">What exactly am I buying, and how do I use it?</span></span>
+                </li>
+                <li class="scheme__row is-key" style="--h:40">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">06</span>
+                  <span><span class="scheme__b" data-i18n="cs.dia.b6">Where to buy</span><span class="scheme__q" data-i18n="cs.dia.q6">Where do I actually get it?</span></span>
+                </li>
+                <li class="scheme__row" style="--h:70">
+                  <span class="scheme__blk" aria-hidden="true"></span><span class="scheme__mark" aria-hidden="true"></span><span class="scheme__n">07</span>
+                  <span><span class="scheme__b" data-i18n="cs.dia.b7">Composition</span><span class="scheme__q" data-i18n="cs.dia.q7">What is actually in it?</span></span>
+                </li>
+              </ol>
+              <p class="scheme__key" data-i18n="cs.dia.key">Marked: the two blocks whose position was the decision</p>
+            </div>
           </figure>
 
         </div>
@@ -429,6 +413,14 @@
       </section>
 
     </article>
+
+    <p class="case__next reveal">
+      <a class="back-link back-link--next" href="case-souzm.html">
+        <span data-i18n="cs.next">Next case — Souz-M Laboratory</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </p>
+
   </div>
 </section>
 </main>
